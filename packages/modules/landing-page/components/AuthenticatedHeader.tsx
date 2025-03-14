@@ -131,13 +131,13 @@ const AuthenticatedHeader = () => {
             className="flex-row justify-center items-center gap-2 bg-background-50 rounded-full p-2"
           >
             <Avatar size="sm">
+            {/*  source={*/}
+            {/*  profileImage*/}
+            {/*      ? { uri: profileImage }*/}
+            {/*      : require('@app-launch-kit/assets/images/user-profile.svg')*/}
+            {/*}*/}
               <AvatarImage
                 className="h-8 w-8"
-                source={
-                  profileImage
-                    ? { uri: profileImage }
-                    : require('@app-launch-kit/assets/images/user-profile.svg')
-                }
                 contentFit="cover"
                 alt="avatar img"
                 height="100%"
@@ -154,7 +154,7 @@ const AuthenticatedHeader = () => {
             size="sm"
             className="background-background-500 mr-2"
           />
-          <MenuItemLabel size="sm">Appearance</MenuItemLabel>
+          <MenuItemLabel size="sm">Settings</MenuItemLabel>
         </MenuItem>
         <MenuItem key="Logout" textValue="Logout">
           <Icon

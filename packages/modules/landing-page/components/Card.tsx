@@ -37,10 +37,10 @@ const LandingPageCard = ({
           <Divider className="my-6 h-px bg-outline-200 self-stretch" />
           <Text className="mb-10 md:mb-16">{description}</Text>
           <Box className="md:mt-auto h-[200px] md:h-[330px]  items-baseline">
+            {/* TODO source={imageWeb} */}
             <Image
               contentFit="contain"
               contentPosition="bottom"
-              source={imageWeb}
               alt="payment fold image"
               className="rounded-t-2xl w-full h-full"
             />

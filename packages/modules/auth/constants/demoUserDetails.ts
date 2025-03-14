@@ -1,5 +1,5 @@
 const demoUser = {
   email: 'test@demo.com',
-  password: 'demopassword',
+  password: 'demopassword1',
 };
 export default demoUser;

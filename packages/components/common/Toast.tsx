@@ -41,7 +41,7 @@ export const showToast = (
   };
   return toast.show({
     ...options,
-    render: ({ id }) => {
+    render: ({ id }: { id: string }) => {
       const toastId = id.toString();
       return (
         <Toast

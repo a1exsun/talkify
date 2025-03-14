@@ -415,7 +415,6 @@ export default function SignUpForm() {
         </Button>
         {/* Google sign-in button, you will see a different file for web and native with extensions GoogleSignInButton.web.tsx and GoogleSignInButton.tsx */}
         {/* <GoogleSignInButton /> */}
-
         <Footer
           footerLinkHref={`${config.routes.signInWithOtp.path}`}
           footerLinkText="Sign up with OTP"

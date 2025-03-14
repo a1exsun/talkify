@@ -19,7 +19,7 @@ import config from '@app-launch-kit/config';
 import RouteCards from '@app-launch-kit/modules/landing-page/components/RouteCards';
 import { useAuth } from '@app-launch-kit/modules/auth';
 
-const LandingPageHero = () => {
+const WelcomePage = () => {
   const { session } = useAuth();
   const userId = session?.user?.id;
   const router = useRouter();
@@ -28,27 +28,25 @@ const LandingPageHero = () => {
     <VStack className="gap-8 md:gap-6 px-4 pt-16 w-full pb-8 md:pt-20 lg:pt-[120px] md:pb-10">
       <Box className="justify-center">
         <HStack className="items-center sm:self-center gap-1 md:hidden whitespace-nowrap">
-          <Link href="https://docs.applaunchk.it/">
-            <HStack className="items-center gap-1">
-              <LinkText className="text-sm sm:text-lg text-primary-500 group-hover/link:text-primary-600 no-underline">
-                View Official Website
-              </LinkText>
-              <Icon
-                as={ExternalLinkIcon}
-                className="stroke-background-800 sm:w-[18px] sm:h-[18px] h-4 w-4"
-              />
-            </HStack>
-          </Link>
+          <HStack className="items-center gap-1">
+            <LinkText className="text-sm sm:text-lg text-primary-500 group-hover/link:text-primary-600 no-underline">
+              View Official Website
+            </LinkText>
+            <Icon
+              as={ExternalLinkIcon}
+              className="stroke-background-800 sm:w-[18px] sm:h-[18px] h-4 w-4"
+            />
+          </HStack>
         </HStack>
-        <Heading className="text-4xl xs:text-5xl md:text-6xl text-typography-950 xs:leading-[57px] md:leading-[70px] sm:text-center mt-5 md:mt-0">
-          The Only Starter Kit You’ll Ever Need
+
+      </Box>
+      <Box className="">
+        <Heading className="text-4xl xs:text-5xl md:text-6xl text-typography-950 xs:leading-[57px] md:leading-[70px] sm:text-center mt-56 md:mt-48">
+          Talkify
         </Heading>
         <Text className="sm:text-center text-lg md:text-xl text-typography-600 mt-4 font-normal">
-          Your Universal App Development starts here!
+          AI empowers English learning
         </Text>
-      </Box>
-      <Box>
-        <HeroIcons />
         {!userId && (
           <Box className="mt-6 sm:px-8 md:px-0">
             <LoginActionButtons />
@@ -67,19 +65,19 @@ const LandingPageHero = () => {
         )}
       </Box>
 
-      <Box className="md:mt-[48px] lg:mt-[60px] sm:items-center gap-3 md:gap-4">
-        <VStack className="sm:items-center gap-2">
-          <Text className="text-typography-800 text-2xl md:text-3xl md:text-center font-roboto-bold">
-            Explore different routes
-          </Text>
-          <Text className="text-typography-600 text-xl">
-            Sign in to explore different routes available in the kit
-          </Text>
-        </VStack>
-        <RouteCards />
-      </Box>
+      {/*<Box className="md:mt-[48px] lg:mt-[60px] sm:items-center gap-3 md:gap-4">*/}
+      {/*  <VStack className="sm:items-center gap-2">*/}
+      {/*    <Text className="text-typography-800 text-2xl md:text-3xl md:text-center font-roboto-bold">*/}
+      {/*      Explore different routes*/}
+      {/*    </Text>*/}
+      {/*    <Text className="text-typography-600 text-xl">*/}
+      {/*      Sign in to explore different routes available in the kit*/}
+      {/*    </Text>*/}
+      {/*  </VStack>*/}
+      {/*  <RouteCards />*/}
+      {/*</Box>*/}
     </VStack>
   );
 };
 
-export default LandingPageHero;
+export default WelcomePage;

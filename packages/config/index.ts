@@ -17,6 +17,7 @@ export type ConfigProps = {
     termsOfService: Route;
     linkExpired: Route;
     notification: Route;
+    review: Route;
   };
   pathToRoute: Record<string, keyof ConfigProps['routes']>;
   auth: {
@@ -102,6 +103,7 @@ const config: ConfigProps = {
     termsOfService: { path: '/terms-of-service', title: 'Terms of Service' },
     linkExpired: { path: '/link-expired', title: 'Link Expired' },
     notification: { path: '/notification', title: 'Notification' },
+    review: { path: '/review', title: 'Review' },
   },
   pathToRoute: {
     '/signin': 'signIn',
@@ -115,6 +117,7 @@ const config: ConfigProps = {
     '/terms-of-service': 'termsOfService',
     '/link-expired': 'linkExpired',
     '/notification': 'notification',
+    '/review': 'review',
   },
   auth: {
     credentialsAuth: {

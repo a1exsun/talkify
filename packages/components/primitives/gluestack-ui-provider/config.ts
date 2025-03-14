@@ -156,6 +156,9 @@ export const config = {
     '--color-indicator-error': '185 28 28',
 
     '--color-border-spinner': '112 0 233',
+
+    /* Custom */
+    '--color-custom-0': '246 246 246',
   }),
   dark: vars({
     '--color-primary-0': '130 130 130',
@@ -311,5 +314,8 @@ export const config = {
     '--color-indicator-error': '232 70 69',
 
     '--color-border-spinner': '207 162 255',
+
+    /* Custom */
+    '--color-custom-0': '0 0 0',
   }),
 };
