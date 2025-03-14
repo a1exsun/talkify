@@ -5,8 +5,8 @@ module.exports = {
   darkMode: 'class',
   important: 'html',
   content: [
-    '../../packages/components/**/**/*.{html,js,jsx,ts,tsx,mdx}',
-    '../../packages/modules/**/**/*.{html,js,jsx,ts,tsx,mdx}',
+    '../../packages/components/!(node_modules)/**/*.{html,js,jsx,ts,tsx,mdx}',
+    '../../packages/modules/!(node_modules)/**/*.{html,js,jsx,ts,tsx,mdx}',
     './app/**/*.{html,js,jsx,ts,tsx}',
     './stories/**/*.{html,js,jsx,ts,tsx,mdx}',
     './stories/**/*.{html,js,jsx,ts,tsx,mdx}',
