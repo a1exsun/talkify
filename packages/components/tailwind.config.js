@@ -8,7 +8,9 @@ module.exports = {
       'md': '768px',
       'lg': '992px',
       'xl': '1280px',
+      '1440p': '1440px',
       '2xl': '1536px',
+      '1800p': '1800px',
     },
     fontFamily: {
       'heading': 'Roboto_700Bold',
@@ -32,6 +34,9 @@ module.exports = {
           800: 'rgb(var(--color-primary-800)/<alpha-value>)',
           900: 'rgb(var(--color-primary-900)/<alpha-value>)',
           950: 'rgb(var(--color-primary-950)/<alpha-value>)',
+        },
+        custom: {
+          0: 'rgb(var(--color-custom-0)/<alpha-value>)',
         },
         secondary: {
           0: 'rgb(var(--color-secondary-0)/<alpha-value>)',
