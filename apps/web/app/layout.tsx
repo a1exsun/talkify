@@ -11,6 +11,7 @@ import {
   ColorModeProvider,
   useColorMode,
 } from '@app-launch-kit/utils/contexts/ColorModeContext';
+import { ChatProvider } from '@app-launch-kit/modules/chat/context/ChatContext';
 
 const myFont = localFont({
   src: './../assets/fonts/SpaceMono-Regular.ttf',
@@ -28,13 +29,17 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">
       <link rel="icon" href="/favicon.ico?v=4" />
-      <title>AppLaunchKit</title>
+      <title>AI Speaking Teacher</title>
       <body className={`${roboto.variable}`} style={{ display: 'flex' }}>
         <StyledJsxRegistry>
           <SessionContextProvider>
             <GluestackUIProvider mode={colorMode}>
               <OverlayProvider>
-                <AuthLoader>{children}</AuthLoader>
+                <AuthLoader>
+                  <ChatProvider>
+                    {children}
+                  </ChatProvider>
+                </AuthLoader>
               </OverlayProvider>
             </GluestackUIProvider>
           </SessionContextProvider>
@@ -51,7 +56,9 @@ export default function RootLayout({
 }>) {
   return (
     <ColorModeProvider>
-      <Layout>{children}</Layout>
+      <ChatProvider>
+        <Layout>{children}</Layout>
+      </ChatProvider>
     </ColorModeProvider>
   );
 }

@@ -1,7 +1,7 @@
-import HomeLandingPage from '@app-launch-kit/modules/dashboard/components/HomeLandingPage';
+import Home from '@app-launch-kit/modules/dashboard/components/Home';
 
 const HomeScreen = () => {
-  return <HomeLandingPage />;
+  return <Home />;
 };
 
 export default HomeScreen;
