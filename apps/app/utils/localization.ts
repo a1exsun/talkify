@@ -3,7 +3,7 @@ import { I18n } from 'i18n-js';
 // Import your translation files
 import en from '../locales/en.json';
 import fr from '../locales/fr.json';
-import ar_AE from '../locales/ar_AE.json';
+import zh_CN from '../locales/zh_CN.json';
 
 // Function to format date and time based on locale
 export const formatDateTime = (date: Date): string => {
@@ -37,7 +37,7 @@ export const formatLanguage = (language: string): string => {
 const i18n = new I18n({
   en: { ...en },
   fr: { ...fr },
-  ar_AE: { ...ar_AE },
+  zh_CN: { ...zh_CN },
 });
 
 // Set the locale once at the beginning of your app.

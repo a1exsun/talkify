@@ -1,3 +1,15 @@
+// TODO 补充次函数的目的
+// const originalEmitWarning = process.emitWarning;
+process.emitWarning = (warning, type, ...args) => {
+  if (
+    (typeof warning === 'string' && warning.includes('punycode')) ||
+    (warning instanceof Error && warning.message.includes('punycode'))
+  ) {
+    return;
+  }
+  originalEmitWarning.call(process, warning, type, ...args);
+};
+
 import { withGluestackUI } from '@gluestack/ui-next-adapter';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -7,12 +19,13 @@ const nextConfig = {
     config.resolve.alias['@unitools/router'] = '@unitools/router-next';
     return config;
   },
-  reactStrictMode: true,
+  reactStrictMode: false,
   transpilePackages: [
     'nativewind',
     'react-native-css-interop',
     'react-native-country-codes-picker',
     '@app-launch-kit/components',
+    '@app-launch-kit/modules',
     'react-native-keyboard-aware-scroll-view',
     'react-native-otp-entry',
   ],

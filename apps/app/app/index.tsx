@@ -1,5 +1,5 @@
 import Header from '@app-launch-kit/modules/landing-page/components/Header';
-import LandingPageHero from '@app-launch-kit/modules/landing-page/components/Hero';
+import WelcomePage from '@app-launch-kit/modules/landing-page/components/Welcome';
 import { VStack } from '@app-launch-kit/components/primitives/vstack';
 import { ScrollView } from '@app-launch-kit/components/primitives/scroll-view';
 import React from 'react';
@@ -13,7 +13,7 @@ const Home = () => {
         {/* <Box className="flex-1 items-start">
           <Text>{getTranslation('welcome')}</Text>
         </Box> */}
-        <LandingPageHero />
+        <WelcomePage />
       </ScrollView>
     </VStack>
   );

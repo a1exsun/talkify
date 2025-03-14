@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "App Launch Kit",
-    "slug": "app-launch-kit",
-    "owner": "applaunchkit-org",
+    "name": "AI Speaking Teacher",
+    "slug": "ai-speaking-teacher",
+    "owner": "a1ex5un",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -13,16 +13,19 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "bundleIdentifier": "com.applaunchkit.demo",
+      "bundleIdentifier": "work.xsun",
       "supportsTablet": true,
       "infoPlist": {
         "CFBundleAllowMixedLocalizations": true
-      }
+      },
+      "deploymentTarget": "15.0"
     },
     "android": {
-      "package": "com.applaunchkit.demo",
+      "package": "work.xsun",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -38,9 +41,6 @@
       "fr": "./locales/fr.json"
     },
     "plugins": [
-      ["@react-native-firebase/app"],
-      ["@react-native-firebase/auth"],
-      ["@react-native-google-signin/google-signin"],
       [
         "expo-build-properties",
         {
@@ -49,13 +49,20 @@
           }
         }
       ],
-      ["expo-router"],
-      ["expo-localization"]
+      [
+        "expo-router"
+      ],
+      [
+        "expo-localization"
+      ]
     ],
     "extra": {
       "supportsRTL": true,
       "eas": {
-        "projectId": "a38b0c54-4bd7-46af-a029-9b97b9689d03"
+        "projectId": "af68b237-016f-4011-ad43-9a5cc99c136e"
+      },
+      "router": {
+        "origin": false
       }
     },
     "experiments": {

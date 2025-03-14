@@ -1,5 +1,5 @@
 {
-  "name": "talkify-app",
+  "name": "app-launch-kit-expo-app",
   "main": "index.js",
   "version": "1.0.0",
   "scripts": {
@@ -79,7 +79,7 @@
     "react-native-web": "~0.19.10",
     "tailwindcss": "^3.4.3",
     "zod": "^3.22.4",
-    "expo-dev-client": "~4.0.29"
+    "expo-dev-client": "~4.0.28"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

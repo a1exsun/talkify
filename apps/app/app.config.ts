@@ -2,8 +2,8 @@ import { ExpoConfig, ConfigContext } from 'expo/config';
 
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
-  name: 'App Launch Kit',
-  slug: 'app-launch-kit',
+  name: 'AI Speaking Teacher',
+  slug: 'ai-speaking-teacher',
   extra: {
     ...config?.extra,
     storybookEnabled: process.env.STORYBOOK_ENABLED,

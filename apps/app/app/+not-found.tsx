@@ -18,8 +18,8 @@ export default function NotFoundScreen() {
         showsVerticalScrollIndicator={false}
       >
         <Box className="px-4 pt-8 pb-4 md:pt-10 md:pb-8 md:rounded-sm md:px-[140px] bg-background-0 flex-1 items-center">
+        {/* TODO source={require('@app-launch-kit/assets/images/404.png')} */}
           <Image
-            source={require('@app-launch-kit/assets/images/404.png')}
             alt="404 page"
             className="h-96 w-[422px] md:mt-16"
             contentFit="contain"

@@ -67,12 +67,6 @@ export default function RootLayout() {
   if (!fontsLoaded) {
     return null;
   }
-
-  return (
-    <ColorModeProvider>
-      <Layout />
-    </ColorModeProvider>
-  );
 }
 
 function Layout() {
