@@ -1,3 +1,4 @@
+"use client";
 import { IIconComponentType } from '@app-launch-kit/components/primitives/icon';
 import {
   CalendarDaysIcon,
@@ -74,26 +75,44 @@ export const bottomTabsList: BottomTab[] = [
   },
   {
     iconName: MailIcon,
-    iconText: 'Inbox',
-    route: 'inbox',
-    isDisabled: true,
-  },
-  {
-    iconName: GlobeIcon,
-    iconText: 'Community',
-    route: 'community',
-    isDisabled: true,
+    iconText: 'Dialog',
+    route: 'dialog',
   },
   {
     iconName: FavouriteIcon,
-    iconText: 'Favourite',
-    route: 'favourites',
-    isDisabled: true,
+    iconText: 'Review',
+    route: 'review',
   },
   {
     iconName: User,
-    iconText: 'Profile',
-    route: 'profile',
+    iconText: 'Me',
+    route: 'me',
+  },
+];
+
+export const SidebarIconsList: SidebarIconsList[] = [
+  {
+    iconName: HomeIcon,
+    iconText: 'Home',
+    routeName: '/home',
+  },
+  {
+    iconName: MailIcon,
+    iconText: 'Chat',
+    routeName: '/chat',
+   
+  },
+  {
+    iconName: FavouriteIcon,
+    iconText: 'Review',
+    routeName: '/review',
+ 
+  },
+  {
+    iconName: User,
+    iconText: 'Me',
+    routeName: '/me',
+   
   },
 ];
 
@@ -110,14 +129,14 @@ export const HeadingCards: CardData[] = [
     title: 'Unlock your skills',
     description: 'Add your skills here',
     routeName: '',
-    isDisabled: true,
+          isDisabled: false,
   },
   {
     iconName: AreaChart,
     title: 'Your goals',
     description: 'Set a target to accomplish',
     routeName: '',
-    isDisabled: true,
+    isDisabled: false,
   },
 ];
 export const HolidaysCards: HolidaysCardData[] = [
@@ -225,31 +244,5 @@ export const accountData: AccountCardType[] = [
     endIcon: ChevronRightIcon,
     disabled: true,
     route: '/rewards',
-  },
-];
-
-export const SidebarIconsList: SidebarIconsList[] = [
-  {
-    iconName: HomeIcon,
-    iconText: 'Home',
-    routeName: '/home',
-  },
-  {
-    iconName: User,
-    iconText: 'Profile',
-    routeName: '/profile',
-  },
-
-  {
-    iconName: GlobeIcon,
-    iconText: 'Community',
-    routeName: '/community',
-    isDisabled: true,
-  },
-  {
-    iconName: MailIcon,
-    iconText: 'Inbox',
-    routeName: '/inbox',
-    isDisabled: true,
   },
 ];

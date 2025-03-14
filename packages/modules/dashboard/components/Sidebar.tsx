@@ -5,6 +5,7 @@ import {
   MoonIcon,
   SunIcon,
   StarIcon,
+  SettingsIcon,
 } from '@app-launch-kit/components/primitives/icon';
 import FullLogoLight from '@app-launch-kit/assets/icons/FullLogo/FullLogoLight';
 import FullLogoDark from '@app-launch-kit/assets/icons/FullLogo/FullLogoDark';
@@ -150,10 +151,24 @@ export const Sidebar = ({
           >
             <Icon
               as={colorMode === 'light' ? MoonIcon : SunIcon}
+              size="lg"
               className="stroke-background-500 group-hover/pressable:stroke-background-700 group-active/pressable:stroke-background-800"
             />
             <Text className="hidden lg:flex text-typography-500 group-hover/pressable:text-typography-700 group-active/pressable:text-typography-800 text-base font-roboto-medium">
-              Appearance
+              {colorMode === 'light' ? '暗色模式' : '亮色模式'}
+            </Text>
+          </Pressable>
+          <Pressable
+            onPress={() => handlePress('/settings')}
+            className="flex-row px-3 py-5 items-center gap-2 hover:bg-background-50 group/pressable justify-center lg:justify-start"
+          >
+            <Icon
+              as={SettingsIcon}
+              size="lg"
+              className="stroke-background-500 group-hover/pressable:stroke-background-700 group-active/pressable:stroke-background-800"
+            />
+            <Text className="hidden lg:flex text-typography-500 group-hover/pressable:text-typography-700 group-active/pressable:text-typography-800 text-base font-roboto-medium">
+              Settings
             </Text>
           </Pressable>
           <Divider className="border-outline-200" />
@@ -163,6 +178,7 @@ export const Sidebar = ({
           >
             <Icon
               as={LogOut}
+              size="lg"
               className="stroke-background-500 group-hover/pressable:stroke-background-700 group-active/pressable:stroke-background-800"
             />
             <Text className="hidden lg:flex  text-typography-500 group-hover/pressable:text-typography-700 group-active/pressable:text-typography-800 text-base font-roboto-medium">
