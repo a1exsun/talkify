@@ -24,7 +24,7 @@ import { Grid, GridItem } from "@app-launch-kit/components/primitives/grid";
 import { MicIcon } from "lucide-react-native";
 import { Divider } from "@app-launch-kit/components/primitives/divider";
 import { useChatContext } from '../context/ChatContext';
-import ModalCircleButton from './ModalCircleButton';
+import { VoiceComponent } from './VoiceComponent';
 
 interface Word {
   id: string;
@@ -277,9 +277,10 @@ export const ScenarioChat = ({ id }: { id?: string }) => {
         <Box className="h-1/3 md:h-full md:min-w-[200px] xl:min-w-[300px] 2xl:min-w-[420px] md:ml-4 flex md:flex-1 flex-col relative">
           <VocabularySection vocabulary={vocabulary} onToggleFavorite={handleToggleFavorite} />
           <Box className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 shadow-lg">
-            <ModalCircleButton 
-              icon={MicIcon as any}
-              modalUrl="http://localhost:3001"
+            <VoiceComponent 
+              url="http://localhost:3001"
+              type="scenario"
+              id={id}
             />
           </Box>
         </Box>

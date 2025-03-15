@@ -1,5 +1,5 @@
 'use client';
-import React, { ReactNode, useState, useEffect } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { Box } from "@app-launch-kit/components/primitives/box";
 import {
   Modal,
@@ -11,67 +11,6 @@ import { WebView } from 'react-native-webview';
 import { isWeb } from '@gluestack-ui/nativewind-utils/IsWeb';
 import CircleIconButton from './CircleIconButton';
 import { useColorMode } from '@app-launch-kit/utils/contexts/ColorModeContext';
-
-// 声明自定义元素以支持TypeScript的JSX类型定义
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      'ai-voice-component': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & {
-        src?: string;
-      }, HTMLElement>;
-    }
-  }
-}
-
-// 定义自定义Web Component - 真正替代iframe的组件
-class EmbeddedContent extends HTMLElement {
-  static get observedAttributes() {
-    return ['src'];
-  }
-
-  constructor() {
-    super();
-    this.attachShadow({ mode: 'open' });
-  }
-
-  connectedCallback() {
-    this.render();
-  }
-
-  attributeChangedCallback() {
-    if (this.shadowRoot) {
-      this.render();
-    }
-  }
-
-  render() {
-    if (this.shadowRoot) {
-      const src = this.getAttribute('src') || '';
-      this.shadowRoot.innerHTML = `
-        <style>
-          :host {
-            display: block;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-          }
-          .container {
-            width: 100%;
-            height: 100%;
-            border: none;
-          }
-        </style>
-        <object
-          class="container"
-          type="text/html"
-          data="${src}"
-          aria-label="Modal Content"
-        ></object>
-      `;
-    }
-  }
-}
-
 interface ModalCircleButtonProps {
   icon: any; // 图标组件
   modalUrl?: string; // 模态框中显示的URL
@@ -106,14 +45,6 @@ export const ModalCircleButton = ({
 }: ModalCircleButtonProps) => {
   const [showModal, setShowModal] = useState(false);
   const { colorMode } = useColorMode();
-  
-  // 注册Web Component
-  useEffect(() => {
-    if (isWeb && !customElements.get('ai-voice-component')) {
-      customElements.define('ai-voice-component', EmbeddedContent);
-    }
-  }, []);
-
   const handlePress = () => {
     setShowModal(true);
   };
@@ -153,16 +84,21 @@ export const ModalCircleButton = ({
             ) : (
               <Box className="flex-1 w-full h-full" style={{ position: 'relative', height: '100%', minHeight: 400 }}>
                 {isWeb ? (
-                  <ai-voice-component 
-                    src={fullUrl}
+                  <iframe 
+                    src={fullUrl} 
                     style={{ 
                       position: 'absolute',
                       top: 0,
                       left: 0,
                       width: '100%', 
-                      height: '100%',
+                      height: '100%', 
+                      border: 'none',
                       display: 'block'
                     }}
+                    title="Modal Content"
+                    allow="microphone; camera"
+                    allowTransparency={true}
+                    sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-microphone"
                   />
                 ) : (
                   <WebView 
