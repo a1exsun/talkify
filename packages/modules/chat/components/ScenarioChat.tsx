@@ -24,6 +24,7 @@ import { Grid, GridItem } from "@app-launch-kit/components/primitives/grid";
 import { MicIcon } from "lucide-react-native";
 import { Divider } from "@app-launch-kit/components/primitives/divider";
 import { useChatContext } from '../context/ChatContext';
+import ModalCircleButton from './ModalCircleButton';
 
 interface Word {
   id: string;
@@ -201,90 +202,6 @@ const VocabularySection = ({ vocabulary, onToggleFavorite }: {
   );
 };
 
-// 语音波纹动画组件
-const AudioWaveCircle = ({ isActive }: { isActive: boolean }) => {
-  const [waveSize, setWaveSize] = useState(1);
-  const animationRef = useRef<NodeJS.Timeout | null>(null);
-  
-  useEffect(() => {
-    if (isActive) {
-      // 模拟随机波纹大小变化
-      animationRef.current = setInterval(() => {
-        // 随机生成1到1.4之间的波纹大小，模拟音频输入变化
-        setWaveSize(1 + Math.random() * 0.4);
-      }, 150);
-    } else {
-      if (animationRef.current) {
-        clearInterval(animationRef.current);
-        setWaveSize(1);
-      }
-    }
-    
-    return () => {
-      if (animationRef.current) {
-        clearInterval(animationRef.current);
-      }
-    };
-  }, [isActive]);
-  
-  return (
-    <Box className="relative flex items-center justify-center">
-      {/* 外圈动画波纹 */}
-      {isActive && (
-        <>
-          <Box 
-            className="absolute rounded-full bg-blue-100 opacity-30"
-            style={{ 
-              width: 80 * waveSize, 
-              height: 80 * waveSize,
-              transform: [{ scale: waveSize }] 
-            }} 
-          />
-          <Box 
-            className="absolute rounded-full bg-blue-200 opacity-40"
-            style={{ 
-              width: 60 * (waveSize * 0.9), 
-              height: 60 * (waveSize * 0.9) 
-            }} 
-          />
-        </>
-      )}
-      {/* 中心圆形 */}
-      <Box 
-        className={`rounded-full flex items-center justify-center ${isActive ? 'bg-blue-500' : 'bg-gray-200'}`}
-        style={{ width: 50, height: 50 }}
-      >
-        <Icon as={MicIcon as any} size="md" color={isActive ? "white" : "gray.500"} />
-      </Box>
-    </Box>
-  );
-};
-
-const ChatMessage = () => {
-  const [isRecording, setIsRecording] = useState(false);
-  
-  const handlePress = () => {
-    setIsRecording(!isRecording);
-    // 这里可以添加实际的录音启动/停止逻辑
-  };
-  
-  return (
-    <Pressable 
-      onPress={handlePress}
-      className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 shadow-lg"
-    >
-      <Box className="flex items-center justify-center">
-        <AudioWaveCircle isActive={isRecording} />
-        {isRecording && (
-          <Text className="absolute -top-10 bg-gray-800 text-white px-3 py-1 rounded-full text-sm">
-            点击停止
-          </Text>
-        )}
-      </Box>
-    </Pressable>
-  );
-};
-
 export const ScenarioChat = ({ id }: { id?: string }) => {
   const [vocabulary, setVocabulary] = useState<Word[]>(sampleVocabulary);
   const [inputText, setInputText] = useState('');
@@ -359,7 +276,12 @@ export const ScenarioChat = ({ id }: { id?: string }) => {
         {/* Chat section - right on desktop, bottom on mobile */}
         <Box className="h-1/3 md:h-full md:min-w-[200px] xl:min-w-[300px] 2xl:min-w-[420px] md:ml-4 flex md:flex-1 flex-col relative">
           <VocabularySection vocabulary={vocabulary} onToggleFavorite={handleToggleFavorite} />
-          <ChatMessage />
+          <Box className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 shadow-lg">
+            <ModalCircleButton 
+              icon={MicIcon as any}
+              modalUrl="http://localhost:3001"
+            />
+          </Box>
         </Box>
       </VStack>
     </Box>
