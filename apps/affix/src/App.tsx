@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import "./App.scss";
 import { LiveAPIProvider } from "./contexts/LiveAPIContext";
 import SidePanel from "./components/side-panel/SidePanel";
 import { Altair } from "./components/altair/Altair";
 import ControlTray from "./components/control-tray/ControlTray";
 import cn from "classnames";
+import useAppParams from "./hooks/useAppParams";
 
 const API_KEY = process.env.REACT_APP_GEMINI_API_KEY as string;
 if (typeof API_KEY !== "string") {
@@ -31,6 +32,19 @@ const host = "generativelanguage.googleapis.com";
 const uri = `wss://${host}/ws/google.ai.generativelanguage.v1alpha.GenerativeService.BidiGenerateContent`;
 
 function App() {
+  // 使用钩子获取URL传递的参数
+  const { colorMode, type, id, token } = useAppParams();
+  
+  // 添加一个效果来监听colorMode的变化并应用它
+  useEffect(() => {
+    console.log('App组件检测到颜色模式:', colorMode);
+  }, [colorMode]);
+  
+  // 显示当前参数，便于调试
+  useEffect(() => {
+    console.log('当前应用参数:', { colorMode, type, id, token });
+  }, [colorMode, type, id, token]);
+  
   // this video reference is used for displaying the active stream, whether that is the webcam or screen capture
   // feel free to style as you see fit
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -41,7 +55,7 @@ function App() {
     <div className="App">
       <LiveAPIProvider url={uri} apiKey={API_KEY}>
         <div className="streaming-console">
-          <SidePanel />
+          {/* <SidePanel /> */}
           <main>
             <div className="main-app-area">
               {/* APP goes here */}
