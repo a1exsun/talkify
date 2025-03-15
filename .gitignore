@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /apps/web/node_modules
+/apps/affix/node_modules
 /packages/*/node_modules
 /apps/app/node_modules
 /.pnp
