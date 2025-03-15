@@ -1,134 +1,71 @@
 # Talkify Desktop App
 
-This is the desktop application for Talkify, built with Electron.
+A cross-platform desktop application for Talkify, built with Electron.
 
-## Prerequisites
+## Quick Start
 
-- Node.js >= 20
-- npm (comes with Node.js)
-- A running instance of the Talkify web application
+1. **Install Required Software**
+   - Install [Node.js](https://nodejs.org/) (version 20 or higher)
+   - Install [VS Code](https://code.visualstudio.com/) (recommended)
 
-## Cross-Platform Support
+2. **Set Up Project**
+   ```bash
+   # Clone and enter project
+   git clone https://github.com/a1exsun/talkify.git
+   cd talkify/apps/desktop
 
-The app supports all major operating systems:
+   # Install dependencies
+   npm install
+   ```
 
-### Windows
-- Distributable: NSIS Installer (.exe)
-- Requirements: Windows 10 or later
-- Installation: Run the .exe installer
-- Development: Works with PowerShell or Command Prompt
+3. **Run the App**
+   ```bash
+   # First terminal: Start web app
+   cd ../../    # Go to root directory
+   npm run web:dev
 
-### macOS
-- Distributable: DMG file (.dmg)
-- Requirements: macOS 10.13 (High Sierra) or later
-- Installation: Mount the .dmg and drag to Applications
-- Development: Works with Terminal
-- Note: For M1/M2 Macs, Rosetta 2 is not required as the app is universal binary
+   # Second terminal: Start desktop app
+   cd apps/desktop
+   npm run dev
+   ```
 
-### Linux
-- Distributable: AppImage
-- Requirements: Modern Linux distribution (Ubuntu 18.04+, Fedora 30+, etc.)
-- Installation: Make AppImage executable and run
-- Development: Works with any standard terminal
-- Note: Some distributions may require additional dependencies
+## Building for Distribution
 
-## Installation
-
-1. Navigate to the desktop app directory:
 ```bash
-cd apps/desktop
-```
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-## Running the App
-
-### Development Mode
-
-1. First, start the web application in one terminal:
-```bash
-# From the root directory
-npm run web:dev
-```
-
-2. Then, in a new terminal, start the desktop app:
-```bash
-# From apps/desktop directory
-npm run dev
-```
-
-This will:
-- Start the app with developer tools enabled
-- Connect to http://localhost:3000 for development
-- Enable hot reloading
-
-### Production Mode
-
-To run the app in production mode:
-```bash
-npm start
-```
-
-This will connect to the production URL (www.talkify.cc).
-
-## Building the App
-
-To create distributable packages for all platforms:
-```bash
+# Create installer for your current platform
 npm run build
 ```
 
-Platform-specific builds:
-```bash
-# Windows only
-npm run build -- --win
-
-# macOS only
-npm run build -- --mac
-
-# Linux only
-npm run build -- --linux
-```
-
-This will create:
-- Windows: NSIS installer (.exe) in `dist` folder
-- macOS: DMG file (.dmg) in `dist` folder
-- Linux: AppImage in `dist` folder
-
-Note: 
-- Building for macOS requires a macOS system
-- Building for Windows is possible on any platform with Wine installed
-- Building for Linux is possible on any platform
-
-## Project Structure
-
-```
-apps/desktop/
-├── main.js           # Main Electron process
-├── preload.js        # Preload script for security
-├── error.html        # Error page
-├── package.json      # Project configuration
-└── README.md         # This file
-```
-
-## Scripts
-
-- `npm run dev` - Start in development mode with debugging
-- `npm start` - Start in production mode
-- `npm run build` - Build distributable packages
-
 ## Troubleshooting
 
-If you see a blank window:
-1. Make sure the web application is running
-2. Check if you can access http://localhost:3000 in your browser
-3. Look for errors in the developer tools console (Ctrl+Shift+I)
+If the app shows a blank window:
+1. Make sure web app is running (`npm run web:dev`)
+2. Check if you can open http://localhost:3000 in your browser
+3. Press Ctrl+Shift+I (or Cmd+Option+I on Mac) to see error messages
+
+## Supported Platforms
+
+- Windows 10 or later
+- macOS 10.13 or later
+- Modern Linux distributions (Ubuntu 18.04+, Fedora 30+)
 
 ## Development Notes
 
-- The app uses `electron-is-dev` to determine the environment
-- Security features like contextIsolation are enabled
-- Web security is disabled in development mode for local development
+### Project Files
+```
+apps/desktop/
+├── main.js                 # Main app code
+├── preload.js             # Security bridge
+├── error.html             # Error page for connection issues
+├── package.json           # Project config
+└── README.md             # This file
+```
+
+### Useful Commands
+```bash
+npm run dev     # Run in development mode
+npm start      # Run in production mode
+npm run build  # Create installers
+```
+
+For more detailed documentation and advanced usage, please visit our [Wiki](https://github.com/a1exsun/talkify/wiki).
