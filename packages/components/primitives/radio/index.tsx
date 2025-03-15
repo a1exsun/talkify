@@ -151,6 +151,7 @@ cssInterop(UIRadio, { className: 'style' });
 cssInterop(UIRadio.Group, { className: 'style' });
 cssInterop(IndicatorWrapper, { className: 'style' });
 cssInterop(LabelWrapper, { className: 'style' });
+// @ts-ignore
 cssInterop(IconWrapper, {
   className: {
     target: 'style',
