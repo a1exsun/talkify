@@ -1,194 +1,71 @@
 # Talkify Desktop App
 
-<div align="center">
+A cross-platform desktop application for Talkify, built with Electron.
 
-This is the desktop application for Talkify, built with Electron. It provides a native desktop experience for the Talkify web application.
+## Quick Start
 
-[Getting Started](#getting-started) •
-[Installation](#installation) •
-[Development](#development) •
-[Building](#building) •
-[Troubleshooting](#troubleshooting)
+1. **Install Required Software**
+   - Install [Node.js](https://nodejs.org/) (version 20 or higher)
+   - Install [VS Code](https://code.visualstudio.com/) (recommended)
 
-</div>
+2. **Set Up Project**
+   ```bash
+   # Clone and enter project
+   git clone https://github.com/a1exsun/talkify.git
+   cd talkify/apps/desktop
 
-## Features
+   # Install dependencies
+   npm install
+   ```
 
-- 🌍 Cross-platform support (Windows, macOS, Linux)
-- 🚀 Fast and responsive native desktop experience
-- 🔄 Real-time synchronization with web app
-- 🛡️ Secure communication between processes
-- 🎨 Native system integration
-- 🔧 Developer tools and debugging support
+3. **Run the App**
+   ```bash
+   # First terminal: Start web app
+   cd ../../    # Go to root directory
+   npm run web:dev
 
-## Getting Started
+   # Second terminal: Start desktop app
+   cd apps/desktop
+   npm run dev
+   ```
 
-### Prerequisites
-
-- Node.js >= 20
-- npm (comes with Node.js)
-- Git
-- A running instance of the Talkify web application
-- VS Code (recommended)
-
-### System Requirements
-
-#### Windows
-- Windows 10 or later (x64)
-- 4GB RAM minimum
-- 500MB disk space
-
-#### macOS
-- macOS 10.13 (High Sierra) or later
-- Intel or Apple Silicon (M1/M2)
-- 4GB RAM minimum
-- 500MB disk space
-
-#### Linux
-- Modern Linux distribution (Ubuntu 18.04+, Fedora 30+, etc.)
-- X11 or Wayland
-- 4GB RAM minimum
-- 500MB disk space
-
-## Installation
-
-1. Clone the repository (if not already done):
-```bash
-git clone https://github.com/your-username/talkify.git
-cd talkify
-```
-
-2. Navigate to the desktop app directory:
-```bash
-cd apps/desktop
-```
-
-3. Install dependencies:
-```bash
-npm install
-```
-
-4. Set up VS Code workspace:
-   - Open VS Code
-   - File -> Open Workspace from File...
-   - Select `talkify.code-workspace`
-
-## Development
-
-### Development Mode
-
-1. Start the web application:
-```bash
-# From the root directory
-npm run web:dev
-```
-
-2. In a new terminal, start the desktop app:
-```bash
-# From apps/desktop directory
-npm run dev
-```
-
-Development features:
-- Hot reloading enabled
-- DevTools available (Ctrl+Shift+I or Cmd+Option+I)
-- Source maps for debugging
-- Console logging enabled
-
-### Environment Variables
-
-- `ELECTRON_IS_DEV`: Force development mode
-- `TALKIFY_API_URL`: Override API URL
-- `DEBUG`: Enable debug logging
-
-### Code Structure
-
-```
-apps/desktop/
-├── main.js                 # Main Electron process
-├── preload.js             # Preload script (security bridge)
-├── error.html             # Error page template
-├── package.json           # Project & build configuration
-├── talkify.code-workspace # VS Code workspace settings
-└── README.md             # Documentation
-```
-
-## Building
-
-### Development Build
+## Building for Distribution
 
 ```bash
-npm run build -- --dir # Unpacked build for testing
-```
-
-### Production Build
-
-For all platforms:
-```bash
+# Create installer for your current platform
 npm run build
 ```
 
-Platform-specific:
-```bash
-npm run build -- --win   # Windows (.exe)
-npm run build -- --mac   # macOS (.dmg)
-npm run build -- --linux # Linux (.AppImage)
-```
-
-Build outputs in `dist/`:
-- Windows: NSIS installer (.exe)
-- macOS: DMG file (.dmg)
-- Linux: AppImage (.AppImage)
-
-### Build Requirements
-
-- Windows builds: Any platform (Wine needed on non-Windows)
-- macOS builds: Requires macOS system
-- Linux builds: Any platform
-- Code signing required for production builds
-
-## Security
-
-- Context isolation enabled
-- Node integration disabled
-- Secure IPC communication
-- CSP policies implemented
-- Regular security updates
-
 ## Troubleshooting
 
-### Common Issues
+If the app shows a blank window:
+1. Make sure web app is running (`npm run web:dev`)
+2. Check if you can open http://localhost:3000 in your browser
+3. Press Ctrl+Shift+I (or Cmd+Option+I on Mac) to see error messages
 
-1. Blank Window
-   - Verify web app is running
-   - Check http://localhost:3000
-   - Check DevTools console (Ctrl+Shift+I)
+## Supported Platforms
 
-2. Build Errors
-   - Clear node_modules: `rm -rf node_modules`
-   - Fresh install: `npm install`
-   - Check platform requirements
+- Windows 10 or later
+- macOS 10.13 or later
+- Modern Linux distributions (Ubuntu 18.04+, Fedora 30+)
 
-3. Development Issues
-   - Verify Node.js version
-   - Check port conflicts
-   - Review error logs
+## Development Notes
 
-### Debug Mode
-
-Run with debug logging:
-```bash
-DEBUG=talkify:* npm run dev
+### Project Files
+```
+apps/desktop/
+├── main.js                 # Main app code
+├── preload.js             # Security bridge
+├── error.html             # Error page for connection issues
+├── package.json           # Project config
+└── README.md             # This file
 ```
 
-## Contributing
+### Useful Commands
+```bash
+npm run dev     # Run in development mode
+npm start      # Run in production mode
+npm run build  # Create installers
+```
 
-1. Fork the repository
-2. Create your feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
-
-## License
-
-MIT License - see LICENSE file for details
+For more detailed documentation and advanced usage, please visit our [Wiki](https://github.com/a1exsun/talkify/wiki).
