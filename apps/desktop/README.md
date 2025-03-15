@@ -1,134 +1,194 @@
 # Talkify Desktop App
 
-This is the desktop application for Talkify, built with Electron.
+<div align="center">
 
-## Prerequisites
+This is the desktop application for Talkify, built with Electron. It provides a native desktop experience for the Talkify web application.
+
+[Getting Started](#getting-started) •
+[Installation](#installation) •
+[Development](#development) •
+[Building](#building) •
+[Troubleshooting](#troubleshooting)
+
+</div>
+
+## Features
+
+- 🌍 Cross-platform support (Windows, macOS, Linux)
+- 🚀 Fast and responsive native desktop experience
+- 🔄 Real-time synchronization with web app
+- 🛡️ Secure communication between processes
+- 🎨 Native system integration
+- 🔧 Developer tools and debugging support
+
+## Getting Started
+
+### Prerequisites
 
 - Node.js >= 20
 - npm (comes with Node.js)
+- Git
 - A running instance of the Talkify web application
+- VS Code (recommended)
 
-## Cross-Platform Support
+### System Requirements
 
-The app supports all major operating systems:
+#### Windows
+- Windows 10 or later (x64)
+- 4GB RAM minimum
+- 500MB disk space
 
-### Windows
-- Distributable: NSIS Installer (.exe)
-- Requirements: Windows 10 or later
-- Installation: Run the .exe installer
-- Development: Works with PowerShell or Command Prompt
+#### macOS
+- macOS 10.13 (High Sierra) or later
+- Intel or Apple Silicon (M1/M2)
+- 4GB RAM minimum
+- 500MB disk space
 
-### macOS
-- Distributable: DMG file (.dmg)
-- Requirements: macOS 10.13 (High Sierra) or later
-- Installation: Mount the .dmg and drag to Applications
-- Development: Works with Terminal
-- Note: For M1/M2 Macs, Rosetta 2 is not required as the app is universal binary
-
-### Linux
-- Distributable: AppImage
-- Requirements: Modern Linux distribution (Ubuntu 18.04+, Fedora 30+, etc.)
-- Installation: Make AppImage executable and run
-- Development: Works with any standard terminal
-- Note: Some distributions may require additional dependencies
+#### Linux
+- Modern Linux distribution (Ubuntu 18.04+, Fedora 30+, etc.)
+- X11 or Wayland
+- 4GB RAM minimum
+- 500MB disk space
 
 ## Installation
 
-1. Navigate to the desktop app directory:
+1. Clone the repository (if not already done):
+```bash
+git clone https://github.com/your-username/talkify.git
+cd talkify
+```
+
+2. Navigate to the desktop app directory:
 ```bash
 cd apps/desktop
 ```
 
-2. Install dependencies:
+3. Install dependencies:
 ```bash
 npm install
 ```
 
-## Running the App
+4. Set up VS Code workspace:
+   - Open VS Code
+   - File -> Open Workspace from File...
+   - Select `talkify.code-workspace`
+
+## Development
 
 ### Development Mode
 
-1. First, start the web application in one terminal:
+1. Start the web application:
 ```bash
 # From the root directory
 npm run web:dev
 ```
 
-2. Then, in a new terminal, start the desktop app:
+2. In a new terminal, start the desktop app:
 ```bash
 # From apps/desktop directory
 npm run dev
 ```
 
-This will:
-- Start the app with developer tools enabled
-- Connect to http://localhost:3000 for development
-- Enable hot reloading
+Development features:
+- Hot reloading enabled
+- DevTools available (Ctrl+Shift+I or Cmd+Option+I)
+- Source maps for debugging
+- Console logging enabled
 
-### Production Mode
+### Environment Variables
 
-To run the app in production mode:
-```bash
-npm start
+- `ELECTRON_IS_DEV`: Force development mode
+- `TALKIFY_API_URL`: Override API URL
+- `DEBUG`: Enable debug logging
+
+### Code Structure
+
+```
+apps/desktop/
+├── main.js                 # Main Electron process
+├── preload.js             # Preload script (security bridge)
+├── error.html             # Error page template
+├── package.json           # Project & build configuration
+├── talkify.code-workspace # VS Code workspace settings
+└── README.md             # Documentation
 ```
 
-This will connect to the production URL (www.talkify.cc).
+## Building
 
-## Building the App
+### Development Build
 
-To create distributable packages for all platforms:
+```bash
+npm run build -- --dir # Unpacked build for testing
+```
+
+### Production Build
+
+For all platforms:
 ```bash
 npm run build
 ```
 
-Platform-specific builds:
+Platform-specific:
 ```bash
-# Windows only
-npm run build -- --win
-
-# macOS only
-npm run build -- --mac
-
-# Linux only
-npm run build -- --linux
+npm run build -- --win   # Windows (.exe)
+npm run build -- --mac   # macOS (.dmg)
+npm run build -- --linux # Linux (.AppImage)
 ```
 
-This will create:
-- Windows: NSIS installer (.exe) in `dist` folder
-- macOS: DMG file (.dmg) in `dist` folder
-- Linux: AppImage in `dist` folder
+Build outputs in `dist/`:
+- Windows: NSIS installer (.exe)
+- macOS: DMG file (.dmg)
+- Linux: AppImage (.AppImage)
 
-Note: 
-- Building for macOS requires a macOS system
-- Building for Windows is possible on any platform with Wine installed
-- Building for Linux is possible on any platform
+### Build Requirements
 
-## Project Structure
+- Windows builds: Any platform (Wine needed on non-Windows)
+- macOS builds: Requires macOS system
+- Linux builds: Any platform
+- Code signing required for production builds
 
-```
-apps/desktop/
-├── main.js           # Main Electron process
-├── preload.js        # Preload script for security
-├── error.html        # Error page
-├── package.json      # Project configuration
-└── README.md         # This file
-```
+## Security
 
-## Scripts
-
-- `npm run dev` - Start in development mode with debugging
-- `npm start` - Start in production mode
-- `npm run build` - Build distributable packages
+- Context isolation enabled
+- Node integration disabled
+- Secure IPC communication
+- CSP policies implemented
+- Regular security updates
 
 ## Troubleshooting
 
-If you see a blank window:
-1. Make sure the web application is running
-2. Check if you can access http://localhost:3000 in your browser
-3. Look for errors in the developer tools console (Ctrl+Shift+I)
+### Common Issues
 
-## Development Notes
+1. Blank Window
+   - Verify web app is running
+   - Check http://localhost:3000
+   - Check DevTools console (Ctrl+Shift+I)
 
-- The app uses `electron-is-dev` to determine the environment
-- Security features like contextIsolation are enabled
-- Web security is disabled in development mode for local development
+2. Build Errors
+   - Clear node_modules: `rm -rf node_modules`
+   - Fresh install: `npm install`
+   - Check platform requirements
+
+3. Development Issues
+   - Verify Node.js version
+   - Check port conflicts
+   - Review error logs
+
+### Debug Mode
+
+Run with debug logging:
+```bash
+DEBUG=talkify:* npm run dev
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
+
+## License
+
+MIT License - see LICENSE file for details
