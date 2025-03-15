@@ -69,11 +69,11 @@ function App() {
                 playsInline
               />
             </div>
-
             <ControlTray
               videoRef={videoRef}
               supportsVideo={true}
               onVideoStreamChange={setVideoStream}
+              autoConnect={true}
             >
               {/* put your own buttons here */}
             </ControlTray>

@@ -256,7 +256,7 @@ export const VideoChat = ({ id }: { id?: string }) => {
             currentTime={currentTime}
             onToggleFavorite={handleToggleFavorite}
           />
-          <Box className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 shadow-lg">
+          <Box className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10">
             <ModalCircleButton 
               icon={MicIcon as any}
               modalUrl="http://localhost:3001"

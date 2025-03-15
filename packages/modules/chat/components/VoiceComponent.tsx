@@ -1,9 +1,29 @@
 'use client';
 import { Box } from "@app-launch-kit/components/primitives/box";
 import { WebView } from 'react-native-webview';
+import { Pressable } from '@app-launch-kit/components/primitives/pressable';
 import { isWeb } from '@gluestack-ui/nativewind-utils/IsWeb';
 import { useColorMode } from '@app-launch-kit/utils/contexts/ColorModeContext';
+import { useEffect, useState } from 'react';
+import { 
+  Popover, 
+  PopoverBackdrop, 
+  PopoverContent, 
+  PopoverBody, 
+  PopoverArrow 
+} from "@app-launch-kit/components/primitives/popover";
+import { Text } from "@app-launch-kit/components/primitives/text";
 
+// 为 spline-viewer 添加类型声明
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'spline-viewer': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & {
+        url: string;
+      }, HTMLElement>;
+    }
+  }
+}
 
 interface VoiceComponentProps {
   url?: string; // 显示的URL
@@ -11,6 +31,7 @@ interface VoiceComponentProps {
   id?: string; // 场景或视频的id
   token?: string; // 用户验证token
   className?: string; // 额外的样式类
+  popoverText?: string; // Popover 显示的文本
 }
 
 /**
@@ -21,10 +42,34 @@ export const VoiceComponent = ({
   type,
   id,
   token,
-  className = ""
+  className = "",
+  popoverText = "[ The dialogue text is presented here. ]"
 }: VoiceComponentProps) => {
   const { colorMode } = useColorMode();
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
+  const handlePopoverOpen = () => {
+    setIsPopoverOpen(true);
+  };
+
+  const handlePopoverClose = () => {
+    setIsPopoverOpen(false);
+  };
+
+  useEffect(() => {
+    if (isWeb) {
+      // 动态加载 Spline Viewer 脚本
+      const script = document.createElement('script');
+      script.type = 'module';
+      script.src = 'https://cdn.jsdelivr.net/gh/a1exsun/file@main/talkify/spline-viewer.js';
+      document.head.appendChild(script);
+      
+      return () => {
+        // 清理脚本
+        document.head.removeChild(script);
+      };
+    }
+  }, []);
 
   const getUrlWithParams = () => {
     const urlObj = new URL(url);
@@ -39,35 +84,68 @@ export const VoiceComponent = ({
   const fullUrl = getUrlWithParams();
 
   return (
-    <Box 
-      className={`w-[500px] h-[150px] ${className}`}
-      style={{ position: 'relative', overflow: 'hidden' }}
+    <Popover
+      isOpen={isPopoverOpen}
+      onClose={handlePopoverClose}
+      onOpen={handlePopoverOpen}
+      placement="top"
+      size="md"
+      trigger={(triggerProps) => {
+        return (
+          <Pressable
+            {...triggerProps}
+            style={{ width: '100%', height: '100%' }}
+          >
+            <Box 
+              className="w-[140px] h-[140px]"
+              style={{ position: 'relative', overflow: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+            >
+              <Box className="w-[500px] h-[140px]">
+                <spline-viewer
+                  url="https://prod.spline.design/1MEc0Gv-ZNJrjjfq/scene.splinecode"
+                  events-target="global"
+                />
+              </Box>
+            </Box>
+          </Pressable>
+        );
+      }}
     >
-      {isWeb ? (
-        <iframe
-          src={fullUrl}
-          style={{ 
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%', 
-            height: '100%',
-            display: 'block'
-          }}
-          allow="microphone; camera"
-          allowTransparency={true}
-          sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-microphone"
-        />
-      ) : (
-        <WebView 
-          source={{ uri: fullUrl }} 
-          style={{ flex: 1, width: '100%', height: '100%' }}
-          javaScriptEnabled={true}
-          domStorageEnabled={true}
-          mediaPlaybackRequiresUserAction={false}
-        />
-      )}
-    </Box>
+      <PopoverBackdrop />
+      <PopoverContent className="h-2/3 w-2/3 flex justify-center items-center">
+        <PopoverBody className="h-full w-full">
+          <Text size="md" className="text-typography-900">
+            {popoverText}
+          </Text>
+          <Box className="hidden">
+            { isWeb ? (
+              <iframe
+                src={fullUrl}
+                style={{ 
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%', 
+                  height: '100%',
+                  display: 'block'
+                }}
+                allow="microphone; camera"
+                allowTransparency={true}
+                sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
+              />
+            ) : (
+              <WebView 
+                source={{ uri: fullUrl }} 
+                style={{ flex: 1, width: '100%', height: '100%' }}
+                javaScriptEnabled={true}
+                domStorageEnabled={true}
+                mediaPlaybackRequiresUserAction={false}
+              />
+            )}
+          </Box>
+        </PopoverBody>
+      </PopoverContent>
+    </Popover>
   );
 };
 

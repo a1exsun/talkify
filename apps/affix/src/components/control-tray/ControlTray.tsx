@@ -30,6 +30,7 @@ export type ControlTrayProps = {
   children?: ReactNode;
   supportsVideo: boolean;
   onVideoStreamChange?: (stream: MediaStream | null) => void;
+  autoConnect?: boolean;
 };
 
 type MediaStreamButtonProps = {
@@ -61,6 +62,7 @@ function ControlTray({
   children,
   onVideoStreamChange = () => {},
   supportsVideo,
+  autoConnect = true,
 }: ControlTrayProps) {
   const videoStreams = [useWebcam(), useScreenCapture()];
   const [activeVideoStream, setActiveVideoStream] =
@@ -80,6 +82,7 @@ function ControlTray({
       connectButtonRef.current.focus();
     }
   }, [connected]);
+
   useEffect(() => {
     document.documentElement.style.setProperty(
       "--volume",
@@ -155,6 +158,17 @@ function ControlTray({
 
     videoStreams.filter((msr) => msr !== next).forEach((msr) => msr.stop());
   };
+
+  // 自动连接功能
+  useEffect(() => {
+    if (autoConnect && !connected) {
+      // 使用setTimeout确保组件完全挂载后再连接
+      const timer = setTimeout(() => {
+        connect();
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [autoConnect, connected, connect]);
 
   return (
     <section className="control-tray">

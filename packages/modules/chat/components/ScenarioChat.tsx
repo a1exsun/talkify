@@ -276,7 +276,7 @@ export const ScenarioChat = ({ id }: { id?: string }) => {
         {/* Chat section - right on desktop, bottom on mobile */}
         <Box className="h-1/3 md:h-full md:min-w-[200px] xl:min-w-[300px] 2xl:min-w-[420px] md:ml-4 flex md:flex-1 flex-col relative">
           <VocabularySection vocabulary={vocabulary} onToggleFavorite={handleToggleFavorite} />
-          <Box className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 shadow-lg">
+          <Box className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10">
             <VoiceComponent 
               url="http://localhost:3001"
               type="scenario"
