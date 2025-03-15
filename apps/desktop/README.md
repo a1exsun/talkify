@@ -8,6 +8,30 @@ This is the desktop application for Talkify, built with Electron.
 - npm (comes with Node.js)
 - A running instance of the Talkify web application
 
+## Cross-Platform Support
+
+The app supports all major operating systems:
+
+### Windows
+- Distributable: NSIS Installer (.exe)
+- Requirements: Windows 10 or later
+- Installation: Run the .exe installer
+- Development: Works with PowerShell or Command Prompt
+
+### macOS
+- Distributable: DMG file (.dmg)
+- Requirements: macOS 10.13 (High Sierra) or later
+- Installation: Mount the .dmg and drag to Applications
+- Development: Works with Terminal
+- Note: For M1/M2 Macs, Rosetta 2 is not required as the app is universal binary
+
+### Linux
+- Distributable: AppImage
+- Requirements: Modern Linux distribution (Ubuntu 18.04+, Fedora 30+, etc.)
+- Installation: Make AppImage executable and run
+- Development: Works with any standard terminal
+- Note: Some distributions may require additional dependencies
+
 ## Installation
 
 1. Navigate to the desktop app directory:
@@ -52,15 +76,32 @@ This will connect to the production URL (www.talkify.cc).
 
 ## Building the App
 
-To create distributable packages:
+To create distributable packages for all platforms:
 ```bash
 npm run build
+```
+
+Platform-specific builds:
+```bash
+# Windows only
+npm run build -- --win
+
+# macOS only
+npm run build -- --mac
+
+# Linux only
+npm run build -- --linux
 ```
 
 This will create:
 - Windows: NSIS installer (.exe) in `dist` folder
 - macOS: DMG file (.dmg) in `dist` folder
 - Linux: AppImage in `dist` folder
+
+Note: 
+- Building for macOS requires a macOS system
+- Building for Windows is possible on any platform with Wine installed
+- Building for Linux is possible on any platform
 
 ## Project Structure
 
