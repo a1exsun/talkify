@@ -38,7 +38,7 @@ interface VoiceComponentProps {
  * 直接显示AI语音组件
  */
 export const VoiceComponent = ({
-  url = "http://localhost:3001",
+  url = "http://talkify-affix.vercel.app",
   type,
   id,
   token,
