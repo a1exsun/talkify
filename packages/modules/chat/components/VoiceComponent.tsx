@@ -134,13 +134,18 @@ export const VoiceComponent = ({
                 sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
               />
             ) : (
-              <WebView 
-                source={{ uri: fullUrl }} 
-                style={{ flex: 1, width: '100%', height: '100%' }}
-                javaScriptEnabled={true}
-                domStorageEnabled={true}
-                mediaPlaybackRequiresUserAction={false}
-              />
+              // <WebView 
+              //   source={{ uri: fullUrl }} 
+              //   style={{ flex: 1, width: '100%', height: '100%' }}
+              //   javaScriptEnabled={true}
+              //   domStorageEnabled={true}
+              //   mediaPlaybackRequiresUserAction={false}
+              // />
+              <Box>
+                <Text>
+                  {fullUrl}
+                </Text>
+              </Box>
             )}
           </Box>
         </PopoverBody>

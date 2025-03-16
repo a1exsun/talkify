@@ -24,7 +24,7 @@ import { Grid, GridItem } from "@app-launch-kit/components/primitives/grid";
 import { MicIcon } from "lucide-react-native";
 import { Divider } from "@app-launch-kit/components/primitives/divider";
 import { useChatContext } from '../context/ChatContext';
-import ModalCircleButton from './ModalCircleButton';
+import { VoiceComponent } from './VoiceComponent';
 
 interface Word {
   id: string;
@@ -257,9 +257,10 @@ export const VideoChat = ({ id }: { id?: string }) => {
             onToggleFavorite={handleToggleFavorite}
           />
           <Box className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10">
-            <ModalCircleButton 
-              icon={MicIcon as any}
-              modalUrl="http://localhost:3001"
+            <VoiceComponent 
+              url="https://talkify-affix.vercel.app"
+              type="video"
+              id={id}
             />
           </Box>
         </Box>
