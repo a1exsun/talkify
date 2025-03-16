@@ -20,6 +20,9 @@
 # production
 /build
 
+# affix
+/apps/affix/build
+
 # misc
 # 各个路径下的.DS_Store文件
 /apps/.DS_Store
