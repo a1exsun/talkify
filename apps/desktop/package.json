@@ -2,38 +2,95 @@
   "name": "@talkify/desktop",
   "version": "1.0.0",
   "description": "Talkify Desktop App",
+  "author": {
+    "name": "Ember Spirit",
+    "email": "support@talkify.cc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/a1exsun/talkify.git"
+  },
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "build": "electron-builder",
-    "dev": "electron . --inspect"
+    "dev": "electron . --inspect",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder -mwl",
+    "dist:win": "electron-builder --win",
+    "dist:mac": "electron-builder --mac",
+    "dist:linux": "electron-builder --linux"
   },
   "dependencies": {
     "electron-is-dev": "^2.0.0"
   },
   "devDependencies": {
     "electron": "^29.1.0",
-    "electron-builder": "^24.13.3"
+    "electron-builder": "^24.13.3",
+    "sharp": "^0.33.5"
   },
   "build": {
     "appId": "com.talkify.desktop",
     "productName": "Talkify",
+    "copyright": "Copyright © 2024 Talkify",
     "directories": {
-      "output": "dist"
+      "output": "dist",
+      "buildResources": "build"
     },
     "files": [
       "main.js",
       "preload.js",
-      "package.json"
+      "error.html",
+      "package.json",
+      "build/**/*"
     ],
     "win": {
-      "target": ["nsis"]
+      "target": [
+        "nsis"
+      ],
+      "icon": "build/icon.ico",
+      "publisherName": "Talkify",
+      "verifyUpdateCodeSignature": false
     },
     "mac": {
-      "target": ["dmg"]
+      "target": [
+        "dmg"
+      ],
+      "icon": "build/icon.icns",
+      "category": "public.app-category.productivity"
     },
     "linux": {
-      "target": ["AppImage"]
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "icon": "build/icon.png",
+      "category": "Office"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Talkify"
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "publish": {
+      "provider": "github",
+      "releaseType": "release"
     }
   }
-} 
+}
