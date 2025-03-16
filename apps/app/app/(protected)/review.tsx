@@ -1,8 +1,7 @@
 import React from 'react';
-import Vocabulary from '@app-launch-kit/modules/review/components/Vocabulary';
+import { AuthGuard } from '@app-launch-kit/modules/auth/components/AuthGuard';
 
-const HomeScreen = () => {
-  return <Vocabulary />;
+const Layout = ({ children }: { children: React.ReactNode }) => {
+  return <AuthGuard protectedRoute={true}>{children}</AuthGuard>;
 };
-
-export default HomeScreen;
+export default Layout;
