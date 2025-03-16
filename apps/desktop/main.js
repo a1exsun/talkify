@@ -21,7 +21,7 @@ function createWindow() {
 
   // URL configuration based on environment
   const startUrl = isDev 
-    ? 'http://localhost:3000' // Development URL
+    ? 'http://www.talkify.cc' // Development URL
     : 'https://www.talkify.cc'; // Production URL
 
   // Debugging information
@@ -35,7 +35,7 @@ function createWindow() {
   // Handle loading timeouts and errors
   const loadTimeout = setTimeout(() => {
     console.error('Timeout: URL failed to load after 10 seconds');
-    console.error('Please make sure your web application is running on http://localhost:3000');
+    console.error('Please make sure your web application is running on https://www.talkify.cc');
     mainWindow.loadFile(path.join(__dirname, 'error.html'));
   }, 10000);
 
@@ -48,7 +48,7 @@ function createWindow() {
     .catch((error) => {
       clearTimeout(loadTimeout);
       console.error('Failed to load URL:', error);
-      console.error('Please make sure your web application is running on http://localhost:3000');
+      console.error('Please make sure your web application is running on https://www.talkify.cc');
       mainWindow.loadFile(path.join(__dirname, 'error.html'));
     });
 

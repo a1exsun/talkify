@@ -40,7 +40,7 @@ npm run build
 
 If the app shows a blank window:
 1. Make sure web app is running (`npm run web:dev`)
-2. Check if you can open http://localhost:3000 in your browser
+2. Check if you can open https://www.talkify.cc in your browser
 3. Press Ctrl+Shift+I (or Cmd+Option+I on Mac) to see error messages
 
 ## Supported Platforms
