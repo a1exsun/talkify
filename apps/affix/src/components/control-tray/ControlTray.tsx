@@ -23,6 +23,7 @@ import { useScreenCapture } from "../../hooks/use-screen-capture";
 import { useWebcam } from "../../hooks/use-webcam";
 import { AudioRecorder } from "../../lib/audio-recorder";
 import AudioPulse from "../audio-pulse/AudioPulse";
+import useAppParams from "../../hooks/useAppParams";
 import "./control-tray.scss";
 
 export type ControlTrayProps = {
@@ -74,8 +75,9 @@ function ControlTray({
   const renderCanvasRef = useRef<HTMLCanvasElement>(null);
   const connectButtonRef = useRef<HTMLButtonElement>(null);
 
-  const { client, connected, connect, disconnect, volume } =
+  const { client, connected, connect, disconnect, volume, setConfig } =
     useLiveAPIContext();
+  const { type, id, token } = useAppParams();
 
   useEffect(() => {
     if (!connected && connectButtonRef.current) {
@@ -169,6 +171,73 @@ function ControlTray({
       return () => clearTimeout(timer);
     }
   }, [autoConnect, connected, connect]);
+
+  // Configure system instructions based on type
+  useEffect(() => {
+    const getSystemInstruction = () => {
+      switch (type) {
+        case 'Beginner':
+          return `You are an English teaching assistant for beginners. Please:
+                - Use simple, basic English vocabulary and short sentences
+                - Speak slowly and clearly
+                - Focus on daily life topics and basic conversations
+                - Gently correct basic grammar and pronunciation mistakes
+                - Encourage and praise often to build confidence
+                - Repeat or rephrase when needed`;
+        case 'Intermediate':
+          return `You are an English tutor for intermediate learners. Please:
+                - Use moderate vocabulary and natural sentence structures
+                - Introduce new words and phrases in context
+                - Focus on practical topics and situational conversations
+                - Correct grammar and vocabulary errors when they affect understanding
+                - Encourage learners to express more complex thoughts
+                - Provide alternative expressions and synonyms`;
+        case 'Advanced':
+          return `You are an English conversation partner for advanced learners. Please:
+                - Use rich vocabulary and complex sentence structures
+                - Discuss sophisticated topics including culture, business, and current events
+                - Focus on nuanced expression and idiomatic language
+                - Point out subtle language errors and suggest improvements
+                - Challenge learners to articulate complex ideas
+                - Share cultural context and usage tips`;
+        case 'Proficient':
+          return `You are a professional English communication coach for proficient speakers. Please:
+                - Engage in high-level discussions on any topic
+                - Focus on mastering subtle language nuances and professional communication
+                - Help refine speaking style and presentation skills
+                - Suggest sophisticated vocabulary and expressions
+                - Discuss complex cultural references and context
+                - Provide feedback on tone and register`;
+        default:
+          return `You are a helpful English learning assistant. Please:
+                - Adapt your language to the learner's apparent level
+                - Focus on natural, practical conversation
+                - Provide gentle correction when needed
+                - Encourage active participation
+                - Create a supportive learning environment`;
+      }
+    };
+
+    setConfig({
+      model: "models/gemini-2.0-flash-exp",
+      generationConfig: {
+        responseModalities: "audio",
+        speechConfig: {
+          voiceConfig: { prebuiltVoiceConfig: { voiceName: "Aoede" } },
+        },
+      },
+      systemInstruction: {
+        parts: [
+          {
+            text: getSystemInstruction(),
+          },
+        ],
+      },
+      tools: [
+        { googleSearch: {} },
+      ],
+    });
+  }, [type, id, token, setConfig]);
 
   return (
     <section className="control-tray">
