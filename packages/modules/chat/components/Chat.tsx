@@ -2,14 +2,15 @@
 import React from 'react';
 import { Box } from "@app-launch-kit/components/primitives/box";
 import { MicIcon } from "lucide-react-native";
-import ModalCircleButton from './ModalCircleButton';
+import { VoiceComponent } from './VoiceComponent';
 
 export const Chat = ({ id }: { id?: string }) => {
   return (
     <Box className="flex-1 bg-background-0 justify-center items-center">
-      <ModalCircleButton 
-        icon={MicIcon as any}
-        modalUrl="http://localhost:3001"
+      <VoiceComponent 
+        url="https://talkify-affix.vercel.app"
+        type="video"
+        id={id}
       />
     </Box>
   );

@@ -278,7 +278,7 @@ export const ScenarioChat = ({ id }: { id?: string }) => {
           <VocabularySection vocabulary={vocabulary} onToggleFavorite={handleToggleFavorite} />
           <Box className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10">
             <VoiceComponent 
-              url="http://localhost:3001"
+              url="https://talkify-affix.vercel.app"
               type="scenario"
               id={id}
             />
