@@ -74,6 +74,7 @@ function ControlTray({
   const [muted, setMuted] = useState(false);
   const renderCanvasRef = useRef<HTMLCanvasElement>(null);
   const connectButtonRef = useRef<HTMLButtonElement>(null);
+  const [userDisconnected, setUserDisconnected] = useState(false);
 
   const { client, connected, connect, disconnect, volume, setConfig } =
     useLiveAPIContext();
@@ -163,14 +164,14 @@ function ControlTray({
 
   // 自动连接功能
   useEffect(() => {
-    if (autoConnect && !connected) {
+    if (autoConnect && !connected && !userDisconnected) {
       // 使用setTimeout确保组件完全挂载后再连接
       const timer = setTimeout(() => {
         connect();
       }, 500);
       return () => clearTimeout(timer);
     }
-  }, [autoConnect, connected, connect]);
+  }, [autoConnect, connected, connect, userDisconnected]);
 
   // Configure system instructions based on type
   useEffect(() => {
@@ -284,7 +285,15 @@ function ControlTray({
           <button
             ref={connectButtonRef}
             className={cn("action-button connect-toggle", { connected })}
-            onClick={connected ? disconnect : connect}
+            onClick={() => {
+              if (connected) {
+                disconnect();
+                setUserDisconnected(true);
+              } else {
+                connect();
+                setUserDisconnected(false);
+              }
+            }}
           >
             <span className="material-symbols-outlined filled">
               {connected ? "pause" : "play_arrow"}

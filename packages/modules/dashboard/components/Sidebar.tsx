@@ -145,7 +145,7 @@ export const Sidebar = ({
           </ScrollView>
         </VStack>
         <VStack className="mt-auto">
-          <Pressable
+          {/* <Pressable
             onPress={toggleColorMode}
             className="flex-row px-3 py-5 items-center gap-2 hover:bg-background-50 group/pressable justify-center lg:justify-start"
           >
@@ -157,7 +157,7 @@ export const Sidebar = ({
             <Text className="hidden lg:flex text-typography-500 group-hover/pressable:text-typography-700 group-active/pressable:text-typography-800 text-base font-roboto-medium">
               {colorMode === 'light' ? '暗色模式' : '亮色模式'}
             </Text>
-          </Pressable>
+          </Pressable> */}
           <Pressable
             onPress={() => handlePress('/settings')}
             className="flex-row px-3 py-5 items-center gap-2 hover:bg-background-50 group/pressable justify-center lg:justify-start"
