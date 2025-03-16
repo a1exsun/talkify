@@ -14,7 +14,7 @@ cssInterop(Svg, {
 const FullLogoLight = (props: any) => (
   <Image
       alt="full-logo"
-      source={require("@app-launch-kit/assets/icons/Logo/IMG_1095.PNG")}
+      source={require("@app-launch-kit/assets/icons/Logo/IMG_1095.png")}
       style={{aspectRatio: 1, width: '100%', borderRadius: 8}} />
 );
 export default FullLogoLight;

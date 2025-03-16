@@ -262,7 +262,7 @@ export const ScenarioChat = ({ id }: { id?: string }) => {
           <Box 
             className="overflow-hidden"
             style={{
-              aspectRatio: 0.8
+              aspectRatio: 1
             }}
           >
             <Image
