@@ -1,17 +1,17 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+node_modules/
 /apps/web/node_modules
 /apps/affix/node_modules
 /packages/*/node_modules
 /apps/app/node_modules
-/.pnp
+/.pnp/
 .pnp.js
 .yarn/install-state.gz
 
 # testing
-/coverage
+coverage/
 
 # next.js
 /.next/
@@ -55,3 +55,36 @@ next-env.d.ts
 # IDE
 /.idea
 /.vscode
+
+# Workspace specific
+.turbo/
+.cache/
+.temp/
+.tmp/
+
+# Mobile app specific
+apps/app/ios/Pods/
+apps/app/android/.gradle/
+apps/app/android/build/
+apps/app/android/app/build/
+apps/app/.expo/
+*.apk
+*.aab
+*.ipa
+
+# Desktop app specific (from apps/desktop/.gitignore)
+apps/desktop/dist/
+apps/desktop/build/icon-*.png
+apps/desktop/build/icon.ico
+apps/desktop/build/icon.icns
+apps/desktop/.electron-symbols/
+
+# Web app specific
+apps/web/.next/
+apps/web/out/
+apps/web/.vercel/
+apps/web/storybook-static/
+
+# Misc
+.vercel
+.netlify
