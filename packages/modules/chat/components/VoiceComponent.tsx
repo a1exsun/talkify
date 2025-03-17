@@ -1,6 +1,5 @@
 'use client';
 import { Box } from "@app-launch-kit/components/primitives/box";
-import { WebView } from 'react-native-webview';
 import { Pressable } from '@app-launch-kit/components/primitives/pressable';
 import { isWeb } from '@gluestack-ui/nativewind-utils/IsWeb';
 import { useColorMode } from '@app-launch-kit/utils/contexts/ColorModeContext';
@@ -96,16 +95,22 @@ export const VoiceComponent = ({
             {...triggerProps}
             style={{ width: '100%', height: '100%' }}
           >
-            <Box 
+            <Box
               className="w-[140px] h-[140px]"
               style={{ position: 'relative', overflow: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
             >
-              <Box className="w-[500px] h-[140px]">
-                <spline-viewer
-                  url="https://prod.spline.design/1MEc0Gv-ZNJrjjfq/scene.splinecode"
-                  events-target="global"
-                />
-              </Box>
+                {
+                  isWeb ? (
+                    <Box className="w-[500px] h-[140px]">
+                        <spline-viewer
+                          url="https://prod.spline.design/1MEc0Gv-ZNJrjjfq/scene.splinecode"
+                          events-target="global"
+                        />
+                    </Box>
+                  ) : (
+                    <Text className="text-center text-typography-900 border border-red-500">语音组件</Text>
+                  )
+                }
             </Box>
           </Pressable>
         );
@@ -117,28 +122,6 @@ export const VoiceComponent = ({
           <Text size="md" className="text-typography-900">
             {popoverText}
           </Text>
-          { isWeb ? (
-            <iframe
-              src={fullUrl}
-              style={{ 
-                width: '1px', 
-                height: '1px',
-                display: 'block',
-                border: 'none'
-              }}
-              allow="microphone; camera; autoplay; clipboard-write; encrypted-media; gyroscope; accelerometer; picture-in-picture; web-share"
-              allowTransparency={true}
-              sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-downloads allow-modals allow-top-navigation allow-presentation"
-            />
-          ) : (
-            <WebView
-              source={{ uri: fullUrl }}
-              style={{ flex: 1, width: '100%', height: '100%' }}
-              javaScriptEnabled={true}
-              domStorageEnabled={true}
-              mediaPlaybackRequiresUserAction={false}
-            />
-          )}
         </PopoverBody>
       </PopoverContent>
     </Popover>
