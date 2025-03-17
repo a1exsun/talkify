@@ -99,12 +99,18 @@ export const VoiceComponent = ({
               className="w-[140px] h-[140px]"
               style={{ position: 'relative', overflow: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
             >
-              <Box className="w-[500px] h-[140px]">
-                <spline-viewer
-                  url="https://prod.spline.design/1MEc0Gv-ZNJrjjfq/scene.splinecode"
-                  events-target="global"
-                />
-              </Box>
+                {
+                  isWeb ? (
+                    <Box className="w-[500px] h-[140px]">
+                        <spline-viewer
+                          url="https://prod.spline.design/1MEc0Gv-ZNJrjjfq/scene.splinecode"
+                          events-target="global"
+                        />
+                    </Box>
+                  ) : (
+                    <Text className="text-center text-typography-900 border border-red-500">语音组件</Text>
+                  )
+                }
             </Box>
           </Pressable>
         );
