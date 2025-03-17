@@ -271,7 +271,7 @@ const Home = () => {
 
     return (
         <Box className="flex-1 bg-background-0">
-            <ScrollView showsVerticalScrollIndicator={false} className="flex-1 max-w-[1640px] mx-auto">
+            <ScrollView showsVerticalScrollIndicator={false} className="w-full flex-1 max-w-[1640px] mx-auto">
                 <VStack
                     className="p-4 md:pb-4 md:px-10 md:pt-5 lg:pt-7 w-full"
                     space="md"
@@ -284,15 +284,15 @@ const Home = () => {
                     {/*    activeTab={activeTab}*/}
                     {/*/>*/}
                     {/* explore page new this week fold 1 */}
-                    <XsunCarousel 
+                    {/* <XsunCarousel 
                         data={data} 
                         borderWidth={borderWidth}
-                        aspectRatio={parentContainerWidth.width > 500 ? 1.78 : 1}
-                        onPress={handlePress}/>
-                    <Heading size="xl" className="flex">
+                        aspectRatio={width > 500 ? 1.78 : 1}
+                        onPress={handlePress}/> */}
+                    {/* <Heading size="xl" className="flex">
                         Keep Learning
                     </Heading>
-                    <KeepLearning/>
+                    <KeepLearning/> */}
 
                     {/* explore page homestay info fold 2 */}
                     {/*<HomestayInformationFold />*/}
@@ -332,12 +332,12 @@ const Home = () => {
                                             style={{aspectRatio: 1, width: '100%'}}
                                         />
                                     </Pressable>
-                                    <VStack space="sm" className="mt-2">
-                                        <Heading size="sm" className="text-typography-900 ml-3">
+                                    <VStack space="xs" className="mt-2">
+                                        <Heading size="xs" className="text-typography-900 ml-3">
                                             {cardData.title}
                                         </Heading>
                                     </VStack>
-                                    <HStack className="flex-1 gap-2 items-center justify-end w-500 mt-2 mb-2">
+                                    <HStack className="items-center justify-end mt-2 mb-2">
                                         <Button variant="outline" className="ml-3 w-24 h-6 border rounded-md">
                                             <Text size="xs" className="">
                                                 {cardData.category}
@@ -345,7 +345,7 @@ const Home = () => {
                                         </Button>
                                         <Box className="flex-1"/>
                                         <Icon as={FavouriteIcon} className="w-4 h-4"/>
-                                        <Text size="xs" className="text-typography-800 w-5 mr-3 text-right">
+                                        <Text size="xs" className="text-typography-800 w-6 mr-3 text-right">
                                             {Math.floor(Math.random() * 1000) + 1}
                                         </Text>
                                     </HStack>
