@@ -75,8 +75,8 @@ export const bottomTabsList: BottomTab[] = [
   },
   {
     iconName: MailIcon,
-    iconText: 'Dialog',
-    route: 'dialog',
+    iconText: 'Chat',
+    route: 'chat',
   },
   {
     iconName: FavouriteIcon,
