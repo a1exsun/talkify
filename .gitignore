@@ -17,6 +17,11 @@ coverage/
 /.next/
 /out/
 
+# capacitor
+/apps/web/public/
+/apps/web/ios/
+/apps/web/android/
+
 # production
 /build
 
