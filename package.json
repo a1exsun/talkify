@@ -12,7 +12,7 @@
   "scripts": {
     "clean-project": "rm -rf node_modules && rm -rf ./apps/app/node_modules && rm -rf ./packages/components/node_modules && rm -rf ./packages/modules/node_modules && rm -rf ./packages/utils/node_modules",
     "bootstrap": "npm install",
-    "app:start": "cd apps/app && DARK_MODE=media EXPO_USE_METRO_WORKSPACE_ROOT=1 npx expo start",
+    "app:start": "cd apps/app && DARK_MODE=media EXPO_USE_METRO_WORKSPACE_ROOT=1 npx expo start -c",
     "app:web": "cd apps/app && DARK_MODE=class EXPO_USE_METRO_WORKSPACE_ROOT=1  npx expo start --web",
     "app:ios": "cd apps/app && ruby -v && DARK_MODE=media EXPO_USE_METRO_WORKSPACE_ROOT=1  npx expo start --ios -c",
     "app:android": "cd apps/app && pwd && ruby -v && DARK_MODE=media EXPO_USE_METRO_WORKSPACE_ROOT=1  npx expo start --android",
