@@ -153,8 +153,8 @@ const Home = () => {
     //     );
     // }
 
-    const handlePress = (link: string) => {
-        router.push(link);
+    const handlePress = (id: string) => {
+        router.push(`/chat?id=${id}&type=scenario`);
     };
 
     return (
@@ -211,7 +211,7 @@ const Home = () => {
                                     gap-0 p-0 flex-1 rounded-md ${colorMode === 'dark' ? 'bg-background-50' : 'bg-background-100'}
                                     `}
                                 >
-                                    <Pressable onPress={() => handlePress(cardData.route)}>
+                                    <Pressable onPress={() => handlePress(cardData._id)}>
                                         <Image
                                             //@ts-ignore
                                             className="border-2 border-background-100 rounded-xl"

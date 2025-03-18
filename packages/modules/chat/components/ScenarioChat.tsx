@@ -25,11 +25,15 @@ import { MicIcon } from "lucide-react-native";
 import { Divider } from "@app-launch-kit/components/primitives/divider";
 import { useChatContext } from '../context/ChatContext';
 import { VoiceComponent } from './VoiceComponent';
+// @ts-ignore
+import { client } from '@sanity/lib/client'
+// @ts-ignore
+import {SCENARIO_QUERY} from '@sanity/lib/queries'
 
 interface Word {
   id: string;
   word: string;
-  explanation: string;
+  translation: string;
   isFavorited: boolean;
 }
 
@@ -41,115 +45,6 @@ interface Message {
 }
 
 // 示例单词数据
-const sampleVocabulary: Word[] = [
-  {
-    id: 'v1',
-    word: 'museum',
-    explanation: '博物馆',
-    isFavorited: false
-  },
-  {
-    id: 'v2',
-    word: 'history',
-    explanation: '历史',
-    isFavorited: true
-  },
-  {
-    id: 'v3',
-    word: 'antique',
-    explanation: '古董',
-    isFavorited: false
-  },
-  {
-    id: 'v4',
-    word: 'rayless',
-    explanation: '昏暗的',
-    isFavorited: false
-  },
-  {
-    id: 'v5',
-    word: 'archaeology',
-    explanation: '考古学',
-    isFavorited: false
-  },
-  {
-    id: 'v6',
-    word: 'sculpture',
-    explanation: '雕塑',
-    isFavorited: false
-  },
-  {
-    id: 'v7',
-    word: 'visit',
-    explanation: '参观',
-    isFavorited: true
-  },
-  {
-    id: 'v8',
-    word: 'ancient',
-    explanation: '古代的',
-    isFavorited: false
-  },
-  {
-    id: 'v9',
-    word: 'bronze ware',
-    explanation: '青铜器',
-    isFavorited: false
-  },
-  {
-    id: 'v10',
-    word: 'be participated in',
-    explanation: '参与了',
-    isFavorited: false
-  },
-  {
-    id: 'v11',
-    word: 'culture',
-    explanation: '文化',
-    isFavorited: false
-  },
-  {
-    id: 'v12',
-    word: 'exhibition',
-    explanation: '展览',
-    isFavorited: false
-  }
-  
-];
-
-const sampleMessages: Message[] = [
-  {
-    id: '1',
-    text: "Hello! Let's practice a job interview scenario. Imagine you're applying for a software engineer position. Why are you interested in this role?",
-    sender: 'ai',
-    timestamp: new Date(Date.now() - 1000 * 60 * 5)
-  },
-  {
-    id: '2',
-    text: "I'm interested in this software engineer position because I enjoy solving complex problems and building applications that can impact users positively.",
-    sender: 'user',
-    timestamp: new Date(Date.now() - 1000 * 60 * 4)
-  },
-  {
-    id: '3',
-    text: "That's a good start. Can you tell me about a challenging technical problem you've solved recently?",
-    sender: 'ai',
-    timestamp: new Date(Date.now() - 1000 * 60 * 3)
-  },
-  {
-    id: '4',
-    text: "Recently, I worked on optimizing database queries in our application that were causing slow load times. I refactored the query structure and implemented proper indexing which reduced load times by 70%.",
-    sender: 'user',
-    timestamp: new Date(Date.now() - 1000 * 60 * 2)
-  },
-  {
-    id: '5',
-    text: "Excellent example! How do you stay updated with the latest technologies and trends in software development?",
-    sender: 'ai',
-    timestamp: new Date(Date.now() - 1000 * 60 * 1)
-  }
-];
-
 const WordCard = ({ word, isLast, onToggleFavorite }: { 
   word: Word, 
   isLast: boolean,
@@ -160,7 +55,7 @@ const WordCard = ({ word, isLast, onToggleFavorite }: {
       <HStack className="justify-between py-4 px-2 2xl:py-6 items-center">
         <HStack className="w-full flex-1 md:flex-col 2xl:flex-row">
           <Text className="w-3/5 md:w-full 2xl:w-3/5" style={{ fontWeight: 'bold' }}>{word.word}</Text>
-          <Text className="text-background-500 flex-1">{word.explanation}</Text>
+          <Text className="text-background-500 flex-1">{word.translation}</Text>
         </HStack>
         <Pressable 
           onPress={() => onToggleFavorite(word.id)}
@@ -203,8 +98,9 @@ const VocabularySection = ({ vocabulary, onToggleFavorite }: {
 };
 
 export const ScenarioChat = ({ id }: { id?: string }) => {
-  const [vocabulary, setVocabulary] = useState<Word[]>(sampleVocabulary);
+  const [vocabulary, setVocabulary] = useState<Word[]>([]);
   const [inputText, setInputText] = useState('');
+  const [scenario, setScenario] = useState<any>([]); // 添加scenarios状态
   const router = useRouter();
   const { setLastChat, resetLastChat } = useChatContext();
   const { width } = useWindowDimensions();
@@ -216,8 +112,19 @@ export const ScenarioChat = ({ id }: { id?: string }) => {
       // 设置全局状态
       setLastChat('scenario', id);
       
-      // 模拟加载场景数据
-      // ... existing code ...
+      // 加载场景数据
+      const fetchScenarios = async () => {
+          try {
+              const scenarioData = await client.fetch(SCENARIO_QUERY, { id });
+              console.log("SCENARIO_QUERY", scenarioData);
+              setScenario(scenarioData); // 更新scenarios状态
+              setVocabulary(scenarioData.glossary);
+          } catch (error) {
+              console.error("Error fetching scenarios:", error);
+          }
+      }
+
+      fetchScenarios();
     }
   }, [id, setLastChat]);
 
@@ -231,7 +138,7 @@ export const ScenarioChat = ({ id }: { id?: string }) => {
         const newWord: Word = {
           id: `v${Date.now()}`,
           word: 'elaborate',
-          explanation: '详细说明；阐述',
+          translation: '详细说明；阐述',
           isFavorited: false
         };
         setVocabulary(prev => [...prev, newWord]);
@@ -266,7 +173,9 @@ export const ScenarioChat = ({ id }: { id?: string }) => {
             }}
           >
             <Image
-              source={imageUrl}
+              source={scenario.url}
+              width={1000}
+              height={1000}
               style={{ width: '100vw', height: '100%', objectFit: 'cover' }} 
               alt="Scenario image"
             />
