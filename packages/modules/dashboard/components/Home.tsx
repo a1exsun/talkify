@@ -19,6 +19,11 @@ import {SearchIcon, FavouriteIcon} from '@app-launch-kit/components/primitives/i
 import Image from "@unitools/image";
 import { useColorMode } from '@app-launch-kit/utils/contexts/ColorModeContext';
 import { Pressable } from '@app-launch-kit/components/primitives/pressable';
+// @ts-ignore
+import { client } from '@sanity/lib/client'
+// @ts-ignore
+import {SCENARIOS_QUERY} from '@sanity/lib/queries'
+
 
 const data = [
     {
@@ -52,129 +57,6 @@ const data = [
         route: "/chat?id=6&type=video",
     },
 ];
-const cardDataMock = [
-    {
-        src: require("@app-launch-kit/assets/images/temporary/formatvideo/dialogvidio/dialogvideo_00001.webp"),
-        title: "古建筑小径",
-        category: "生活场景",
-        route: "/chat?id=1&type=scenario",
-    },
-    {
-        src: require("@app-launch-kit/assets/images/temporary/formatvideo/speakingvideo/speakingvideo_00001.webp"),
-        title: "美丽中国-熊猫篇",
-        category: "口语练习",
-        route: "/chat?id=2&type=scenario",
-    },
-    {
-        src: require("@app-launch-kit/assets/images/temporary/formatvideo/lifevideo/lifevideo_00001.jpg"),
-        title: "商务会议常用词汇",
-        category: "场景词汇",
-        route: "/chat?id=3&type=scenario",
-    },
-    {
-        src: require("@app-launch-kit/assets/images/temporary/formatvideo/dialogvidio/dialogvideo_00005.webp"),
-        title: "置办年货常用词汇",
-        category: "生活场景",
-        route: "/chat?id=4&type=scenario",
-    },
-    {
-        src: require("@app-launch-kit/assets/images/temporary/formatvideo/speakingvideo/speakingvideo_00007.webp"),
-        title: "面试对话范例",
-        category: "口语练习",
-        route: "/chat?id=5&type=scenario",
-    },
-    {
-        src: require("@app-launch-kit/assets/images/temporary/formatvideo/lifevideo/lifevideo_00008.jpg"),
-        title: "身体状况自述表达",
-        category: "场景词汇",
-        route: "/chat?id=6&type=scenario",
-    },
-    {
-        src: require("@app-launch-kit/assets/images/temporary/formatvideo/dialogvidio/dialogvideo_00010.webp"),
-        title: "圣诞节高频词汇",
-        category: "生活场景",
-        route: "/chat?id=7&type=scenario",
-    },
-    {
-        src: require("@app-launch-kit/assets/images/temporary/formatvideo/speakingvideo/speakingvideo_00013.webp"),
-        title: "电影院场景对话",
-        category: "口语练习",
-        route: "/chat?id=8&type=scenario",
-    },
-    {
-        src: require("@app-launch-kit/assets/images/temporary/formatvideo/lifevideo/lifevideo_00015.jpg"),
-        title: "团队讨论常用词汇",
-        category: "场景词汇",
-        route: "/chat?id=9&type=scenario",
-    },
-    {
-        src: require("@app-launch-kit/assets/images/temporary/formatvideo/dialogvidio/dialogvideo_00015.webp"),
-        title: "博物馆场景高频词汇",
-        category: "生活场景",
-        route: "/chat?id=10&type=scenario",
-    },
-    {
-        src: require("@app-launch-kit/assets/images/temporary/formatvideo/speakingvideo/speakingvideo_00019.webp"),
-        title: "冷却系统论文1-1",
-        category: "口语练习",
-        route: "/chat?id=11&type=scenario",
-    },
-    {
-        src: require("@app-launch-kit/assets/images/temporary/formatvideo/lifevideo/lifevideo_00022.jpg"),
-        title: "预约培训常用词汇",
-        category: "场景词汇",
-        route: "/chat?id=12&type=scenario",
-    },
-    {
-        src: require("@app-launch-kit/assets/images/temporary/formatvideo/dialogvidio/dialogvideo_00020.jpg"),
-        title: "花店场景惯用词汇",
-        category: "生活场景",
-        route: "/chat?id=13&type=scenario",
-    },
-    {
-        src: require("@app-launch-kit/assets/images/temporary/formatvideo/speakingvideo/speakingvideo_00016.webp"),
-        title: "冷却系统论文范例1-5",
-        category: "口语练习",
-        route: "/chat?id=14&type=scenario",
-    },
-    {
-        src: require("@app-launch-kit/assets/images/temporary/formatvideo/lifevideo/lifevideo_00017.jpg"),
-        title: "态度相关描述词汇",
-        category: "场景词汇",
-        route: "/chat?id=15&type=scenario",
-    },
-    {
-        src: require("@app-launch-kit/assets/images/temporary/formatvideo/dialogvidio/dialogvideo_00018.webp"),
-        title: "电动车相关词汇",
-        category: "生活场景",
-        route: "/chat?id=16&type=scenario",
-    },
-    {
-        src: require("@app-launch-kit/assets/images/temporary/formatvideo/speakingvideo/speakingvideo_00020.webp"),
-        title: "评论反馈相关论文3-3",
-        category: "口语练习",
-        route: "/chat?id=17&type=scenario",
-    },
-    {
-        src: require("@app-launch-kit/assets/images/temporary/formatvideo/lifevideo/lifevideo_00019.jpg"),
-        title: "对其他人的形容",
-        category: "场景词汇",
-        route: "/chat?id=18&type=scenario",
-    },
-    {
-        src: require("@app-launch-kit/assets/images/temporary/formatvideo/dialogvidio/dialogvideo_00004.webp"),
-        title: "卧室场景物品",
-        category: "生活场景",
-        route: "/chat?id=19&type=scenario",
-    },
-    {
-        src: require("@app-launch-kit/assets/images/temporary/formatvideo/dialogvidio/dialogvideo_00003.webp"),
-        title: "卧室场景物品",
-        category: "生活场景",
-        route: "/chat?id=20&type=scenario",
-    },
-
-];
 
 const Home = () => {
     const { colorMode } = useColorMode();
@@ -182,6 +64,7 @@ const Home = () => {
     const [userName, setUserName] = useState('');
     const [error, setError] = useState<string | null>(null); // Error state
     const [isLoading, setIsLoading] = useState(true); // 添加这行
+    const [scenarios, setScenarios] = useState<any[]>([]); // 添加scenarios状态
     const parentContainerWidth = useWindowDimensions();
     const router = useRouter();
 
@@ -197,10 +80,16 @@ const Home = () => {
     })();
 
     useEffect(() => {
-        // 模拟1秒后加载真实内容
-        const timer = setTimeout(() => {
-            setIsLoading(false);
-        }, 1000);
+        const fetchScenarios = async () => {
+            try {
+                const scenariosData = await client.fetch(SCENARIOS_QUERY);
+                console.log("SCENARIOS_QUERY", scenariosData);
+                setScenarios(scenariosData); // 更新scenarios状态
+            } catch (error) {
+                console.error("Error fetching scenarios:", error);
+            }
+        }
+        fetchScenarios();
 
         const fetchProfile = async () => {
             if (session?.user?.id) {
@@ -236,7 +125,6 @@ const Home = () => {
         };
 
         fetchProfile();
-        return () => clearTimeout(timer);
     }, [session?.user?.id]);
 
 
@@ -314,12 +202,12 @@ const Home = () => {
                     </Input>
 
                     <HStack className="flex flex-wrap gap-4 mt-2" space="md">
-                        {cardDataMock.map((cardData, index) => (
+                        {Array(20).fill(null).flatMap(() => scenarios).map((cardData, index) => (
                             <React.Fragment key={index}>
                                 <Box
                                     className={`
                                     min-w-[160px] sm:min-w-[180px] md:min-w-[170px] lg:min-w-[180px] xl:min-w-[218px] 1440p:min-w-[250px] 2xl:min-w-[280px] 1800p:min-w-[320px]
-                                    max-w-[500px] 2xl:max-w-[800px]
+                                    max-w-[320px]
                                     gap-0 p-0 flex-1 rounded-md ${colorMode === 'dark' ? 'bg-background-50' : 'bg-background-100'}
                                     `}
                                 >
@@ -328,7 +216,9 @@ const Home = () => {
                                             //@ts-ignore
                                             className="border-2 border-background-100 rounded-xl"
                                             alt={`image${index}`}
-                                            source={cardData.src}
+                                            source={cardData.url}
+                                            width={320}
+                                            height={320}
                                             style={{aspectRatio: 1, width: '100%'}}
                                         />
                                     </Pressable>
