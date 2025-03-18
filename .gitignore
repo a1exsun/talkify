@@ -93,3 +93,4 @@ apps/web/storybook-static/
 # Misc
 .vercel
 .netlify
+.sanity
