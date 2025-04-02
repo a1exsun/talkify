@@ -212,15 +212,22 @@ const Home = () => {
                                     `}
                                 >
                                     <Pressable onPress={() => handlePress(cardData._id)}>
-                                        <Image
-                                            //@ts-ignore
-                                            className="border-2 border-background-100 rounded-xl"
-                                            alt={`image${index}`}
-                                            source={cardData.url}
-                                            width={320}
-                                            height={320}
-                                            style={{aspectRatio: 1, width: '100%'}}
-                                        />
+                                        {cardData.url ? (
+                                            <Image
+                                                //@ts-ignore
+                                                className="border-2 border-background-100 rounded-xl"
+                                                alt={`image${index}`}
+                                                source={cardData.url}
+                                                width={320}
+                                                height={320}
+                                                style={{aspectRatio: 1, width: '100%'}}
+                                            />
+                                        ) : (
+                                            <Box 
+                                                className="border-2 border-background-100 rounded-xl bg-background-200"
+                                                style={{aspectRatio: 1, width: '100%'}}
+                                            />
+                                        )}
                                     </Pressable>
                                     <VStack space="xs" className="mt-2">
                                         <Heading size="xs" className="text-typography-900 ml-3">
