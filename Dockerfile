@@ -12,6 +12,14 @@ COPY apps/web/public ./apps/web/public
 COPY apps/web/next.config.mjs ./apps/web/
 COPY apps/web/package.json ./apps/web/
 
+# 定义环境变量，这些值可以被docker run命令中的参数覆盖
+ENV NEXT_PUBLIC_SUPABASE_URL=''
+ENV NEXT_PUBLIC_SUPABASE_ANON_KEY=''
+ENV NEXT_PUBLIC_SUPABASE_FUNCTIONS_URL=''
+ENV NEXT_PUBLIC_SANITY_PROJECT_ID=''
+ENV NEXT_PUBLIC_SANITY_DATASET=''
+ENV NEXT_PUBLIC_SANITY_API_READ_TOKEN=''
+
 # 设置工作目录并启动服务
 WORKDIR /app/apps/web
 EXPOSE 3000

@@ -29,7 +29,7 @@
     "web:start": "cd apps/web && next start",
     "web:docker-build": "docker build -f Dockerfile -t talkify:latest .",
     "web:docker-build-amd64": "docker build --platform linux/amd64 -f Dockerfile -t talkify:latest .",
-    "web:docker-publish": "docker tag talkify:latest ghcr.io/a1exsun/talkify:0.0.2 && docker push ghcr.io/a1exsun/talkify:0.0.2",
+    "web:docker-publish": "docker tag talkify:latest ghcr.io/a1exsun/talkify:0.1.0 && docker push ghcr.io/a1exsun/talkify:0.1.1",
     "web:docker-run": "docker run --name talkify -p 13323:3000 talkify:latest",
     "web:storybook": "cd apps/web && storybook dev -p 6006",
     "build-storybook": "cd apps/web && storybook build",
