@@ -202,7 +202,7 @@ const Home = () => {
                     </Input>
 
                     <HStack className="flex flex-wrap gap-4 mt-2" space="md">
-                        {Array(20).fill(null).flatMap(() => scenarios).map((cardData, index) => (
+                        {(scenarios).map((cardData, index) => (
                             <React.Fragment key={index}>
                                 <Box
                                     className={`
