@@ -97,7 +97,14 @@ const VocabularySection = ({ vocabulary, onToggleFavorite }: {
   );
 };
 
-export const ScenarioChat = ({ id }: { id?: string }) => {
+export interface ScenarioChatProps {
+  id?: string;
+  startRTC?: () => void;
+  closeRTC?: () => void;
+  isRTCStarted?: boolean;
+}
+
+export const ScenarioChat = ({ id, startRTC, closeRTC, isRTCStarted }: ScenarioChatProps) => {
   const [vocabulary, setVocabulary] = useState<Word[]>([]);
   const [inputText, setInputText] = useState('');
   const [scenario, setScenario] = useState<any>([]); // 添加scenarios状态
@@ -190,6 +197,9 @@ export const ScenarioChat = ({ id }: { id?: string }) => {
               url="https://talkify-affix.vercel.app"
               type="scenario"
               id={id}
+              onStartRTC={startRTC}
+              onCloseRTC={closeRTC}
+              isRTCStarted={isRTCStarted}
             />
           </Box>
         </Box>

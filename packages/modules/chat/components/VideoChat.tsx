@@ -164,7 +164,14 @@ const SubtitleSection = ({ subtitles, currentTime, onToggleFavorite }: {
   );
 };
 
-export const VideoChat = ({ id }: { id?: string }) => {
+export interface VideoChatProps {
+  id?: string;
+  startRTC?: () => void;
+  closeRTC?: () => void;
+  isRTCStarted?: boolean;
+}
+
+export const VideoChat = ({ id, startRTC, closeRTC, isRTCStarted }: VideoChatProps) => {
   const [inputText, setInputText] = useState('');
   const [subtitles, setSubtitles] = useState<Subtitle[]>([]);
   const [currentTime, setCurrentTime] = useState(0);
@@ -249,18 +256,22 @@ export const VideoChat = ({ id }: { id?: string }) => {
             />
           </Box>
         </Box>
-
-        <Box className="xl:h-full xl:min-w-[300px] 2xl:min-w-[420px] xl:ml-4 flex flex-1 flex-col relative">
-          <SubtitleSection
-            subtitles={subtitles}
-            currentTime={currentTime}
-            onToggleFavorite={handleToggleFavorite}
+        
+        {/* Chat section - right on desktop, bottom on mobile */}
+        <Box className="h-1/3 md:h-full md:min-w-[200px] xl:min-w-[300px] 2xl:min-w-[420px] md:ml-4 flex md:flex-1 flex-col relative">
+          <SubtitleSection 
+            subtitles={subtitles} 
+            currentTime={currentTime} 
+            onToggleFavorite={handleToggleFavorite} 
           />
           <Box className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10">
             <VoiceComponent 
               url="https://talkify-affix.vercel.app"
               type="video"
               id={id}
+              onStartRTC={startRTC}
+              onCloseRTC={closeRTC}
+              isRTCStarted={isRTCStarted}
             />
           </Box>
         </Box>

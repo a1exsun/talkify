@@ -34,6 +34,9 @@ interface VoiceComponentProps {
   token?: string; // 用户验证token
   className?: string; // 额外的样式类
   popoverText?: string; // Popover 显示的文本
+  onStartRTC?: () => void; // 启动RTC连接的回调函数
+  onCloseRTC?: () => void; // 关闭RTC连接的回调函数
+  isRTCStarted?: boolean; // RTC连接是否已启动
 }
 
 /**
@@ -46,6 +49,9 @@ export const VoiceComponent = ({
   token,
   className = '',
   popoverText = '[ The dialogue text is presented here. ]',
+  onStartRTC,
+  onCloseRTC,
+  isRTCStarted = false,
 }: VoiceComponentProps) => {
   const { colorMode } = useColorMode();
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -80,14 +86,23 @@ export const VoiceComponent = ({
     if (type) urlObj.searchParams.append('type', type);
     if (id) urlObj.searchParams.append('id', id);
     if (token) urlObj.searchParams.append('token', token);
+    if (isRTCStarted) urlObj.searchParams.append('rtcStarted', 'true');
 
     return urlObj.toString();
   };
 
   const fullUrl = getUrlWithParams();
 
+  const handlePress = () => {
+    if (isRTCStarted && onCloseRTC) {
+      onCloseRTC();
+    } else if (!isRTCStarted && onStartRTC) {
+      onStartRTC();
+    }
+  };
+
   return (
-    <Pressable style={{ width: '100%', height: '100%' }}>
+    <Pressable style={{ width: '100%', height: '100%' }} onPress={handlePress}>
       <Box
         className="w-[140px] h-[140px]"
         style={{
