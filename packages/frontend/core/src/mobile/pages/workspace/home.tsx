@@ -1,13 +1,7 @@
 import { SafeArea, useThemeColorV2 } from '@affine/component';
 
 import { AppTabs } from '../../components';
-import {
-  NavigationPanelCollections,
-  NavigationPanelFavorites,
-  NavigationPanelOrganize,
-  NavigationPanelTags,
-} from '../../components/navigation';
-import { HomeHeader, RecentDocs } from '../../views';
+import { HomeHeader, Scenarios, SearchBar } from '../../views';
 
 export const Component = () => {
   useThemeColorV2('layer/background/mobile/primary');
@@ -15,8 +9,9 @@ export const Component = () => {
   return (
     <>
       <HomeHeader />
-      <RecentDocs />
+      <div>Keep Watching</div>
       <SafeArea bottom>
+        <SearchBar />
         <div
           style={{
             display: 'flex',
@@ -25,10 +20,7 @@ export const Component = () => {
             padding: '0 8px 32px 8px',
           }}
         >
-          <NavigationPanelFavorites />
-          <NavigationPanelOrganize />
-          <NavigationPanelCollections />
-          <NavigationPanelTags />
+          <Scenarios />
         </div>
       </SafeArea>
       <AppTabs />

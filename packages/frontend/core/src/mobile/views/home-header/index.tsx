@@ -1,18 +1,11 @@
-import {
-  IconButton,
-  SafeArea,
-  startScopedViewTransition,
-} from '@affine/component';
+import { IconButton, SafeArea } from '@affine/component';
 import { WorkspaceDialogService } from '@affine/core/modules/dialogs';
-import { WorkbenchService } from '@affine/core/modules/workbench';
-import { useI18n } from '@affine/i18n';
 import { SettingsIcon } from '@blocksuite/icons/rc';
 import { useService } from '@toeverything/infra';
 import clsx from 'clsx';
 import { useCallback, useRef, useState } from 'react';
 
-import { SearchInput, WorkspaceSelector } from '../../components';
-import { searchVTScope } from '../../components/search-input/style.css';
+import { WorkspaceSelector } from '../../components';
 import { useGlobalEvent } from '../../hooks/use-global-events';
 import * as styles from './styles.css';
 
@@ -27,14 +20,6 @@ export const HomeHeader = () => {
 
   const workspaceCardRef = useRef<HTMLDivElement>(null);
   const floatWorkspaceCardRef = useRef<HTMLDivElement>(null);
-  const t = useI18n();
-  const workbench = useService(WorkbenchService).workbench;
-
-  const navSearch = useCallback(() => {
-    startScopedViewTransition(searchVTScope, () => {
-      workbench.open('/search');
-    });
-  }, [workbench]);
 
   const [dense, setDense] = useState(false);
 
@@ -61,7 +46,6 @@ export const HomeHeader = () => {
         <div className={styles.headerSettingRow} />
         <div className={styles.wsSelectorAndSearch}>
           <WorkspaceSelector ref={workspaceCardRef} />
-          <SearchInput placeholder={t['Quick search']()} onClick={navSearch} />
         </div>
       </SafeArea>
       {/* float */}
