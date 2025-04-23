@@ -109,18 +109,18 @@ const defaultDevServerConfig = {
   proxy: [
     {
       context: '/api',
-      target: 'http://localhost:3010',
+      target: 'http://192.168.4.21:3010',
       logLevel: httpProxyMiddlewareLogLevel,
     },
     {
       context: '/socket.io',
-      target: 'http://localhost:3010',
+      target: 'http://192.168.4.21:3010',
       ws: true,
       logLevel: httpProxyMiddlewareLogLevel,
     },
     {
       context: '/graphql',
-      target: 'http://localhost:3010',
+      target: 'http://192.168.4.21:3010',
       logLevel: httpProxyMiddlewareLogLevel,
     },
   ],
