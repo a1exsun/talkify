@@ -15,7 +15,7 @@ export const tUnion = (list: TType[]): TUnion => ({
 });
 
 // TODO treat as data type
- 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export interface TArray<Ele extends TType = TType> {
   type: 'array';
   ele: Ele;
@@ -140,7 +140,7 @@ export class DataDefine<Data extends DataTypeShape = Record<string, unknown>> {
 // type DataTypeVar = {};
 
 // TODO support generic data type
- 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface DataDefineConfig<T extends DataTypeShape> {
   name: string;
   supers: DataDefine[];

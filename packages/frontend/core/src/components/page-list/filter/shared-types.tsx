@@ -62,6 +62,6 @@ export type InternalVariableMap = {
 };
 
 declare module '@affine/env/filter' {
-   
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface VariableMap extends InternalVariableMap {}
 }

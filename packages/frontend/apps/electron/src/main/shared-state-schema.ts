@@ -59,7 +59,7 @@ export const MenubarStateSchema = z.object({
   enabled: z.boolean().default(true),
 });
 
- 
+// eslint-disable-next-line no-redeclare
 export type MenubarStateSchema = z.infer<typeof MenubarStateSchema>;
 
 export const MeetingSettingsKey = 'meetingSettings' as const;
@@ -77,5 +77,5 @@ export const MeetingSettingsSchema = z.object({
   recordingMode: z.enum(['none', 'prompt', 'auto-start']).default('prompt'),
 });
 
- 
+// eslint-disable-next-line no-redeclare
 export type MeetingSettingsSchema = z.infer<typeof MeetingSettingsSchema>;
